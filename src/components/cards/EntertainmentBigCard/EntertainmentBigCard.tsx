@@ -1,18 +1,14 @@
 import { useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 
+import { GetPrice } from "../../../services/getPrice";
 import { IEntertainments } from "../../../types";
 import Carousel from "../../Carousel";
 
 import styles from "./EntertainmentBigCard.module.scss";
 
-interface IProps extends IEntertainments {
-  cur_scale: number;
-  cur_rate: number;
-}
-
-export const EntertainmentBigCard = (props: IProps) => {
-  const { id, photos, title, prices, description_short, cur_rate, cur_scale } =
+export const EntertainmentBigCard = (props: IEntertainments) => {
+  const { id, photos, title, prices, description_short } =
     props;
   const navigate = useNavigate();
 
@@ -41,11 +37,10 @@ export const EntertainmentBigCard = (props: IProps) => {
       })
     : ([] as number[]);
   price.sort((a: any, b: any) => a - b);
-  const priceBYN =
-    price && price[0] ? +((price[0] / cur_scale) * cur_rate).toFixed(0) : null;
-
+  const priceBYN = price[0] ? GetPrice(+price[0]):null
+   
   const priceScreen = priceBYN
-    ? `от ${priceBYN} ${priceBYN > 1 ? "рублей" : "рубля"}`
+    ? `от ${priceBYN} ${+priceBYN > 1 ? "рублей" : "рубля"}`
     : "бесплатно";
 
   return (

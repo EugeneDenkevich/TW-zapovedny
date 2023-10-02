@@ -15,10 +15,12 @@ export const useRate = () => {
   const { data: rate } = useGetRateQuery(currency, { skip: isSkip });
   const answer = rate
     ? {
+        currency:currency,
         cur_scale: rate?.Cur_Scale,
         cur_rate: rate?.Cur_OfficialRate,
       }
     : {
+        currency:"BYN",
         cur_scale: 1,
         cur_rate: 1,
       };

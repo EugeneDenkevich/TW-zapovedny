@@ -6,7 +6,6 @@ import { FaceBlock } from "../../components/FaceBlock/FaceBlock";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
 import { useGetObjectsQuery } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
-import { useRate } from "../../services/useRate";
 import { House } from "../../types";
 
 import styles from "./Houses.module.scss";
@@ -14,11 +13,9 @@ import styles from "./Houses.module.scss";
 export const Houses = () => {
   const { data } = useGetObjectsQuery();
   const datas = useDatas();
-  const rate = useRate();
-
+  
   const { title, titleHouse, house_back, nameForSearchButton } = datas;
-  const { cur_rate, cur_scale } = rate;
-
+  
   return (
     <>
       <FaceBlock title={titleHouse} image={house_back} />
@@ -41,8 +38,7 @@ export const Houses = () => {
                   bed_count={house.bed_count}
                   beds_types={house.beds_types}
                   rooms_types={house.rooms_types}
-                  cur_rate={cur_rate}
-                  cur_scale={cur_scale}
+                  
                 />
               );
             })

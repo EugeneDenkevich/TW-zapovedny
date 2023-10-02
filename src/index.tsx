@@ -18,8 +18,8 @@ root.render(
     <HelmetProvider>
       <BrowserRouter>
         <Provider store={store}>
-          <ScrollToTop />
-          <App />
+          <ScrollToTop/>
+            <App />
         </Provider>
       </BrowserRouter>
     </HelmetProvider>

@@ -8,7 +8,6 @@ import { FaceBlock } from "../../components/FaceBlock";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
 import { useGetEntertainmentsQuery } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
-import { useRate } from "../../services/useRate";
 
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
@@ -17,15 +16,14 @@ import styles from "./Entertainment.module.scss";
 const Entertainment = () => {
   const { data } = useGetEntertainmentsQuery();
   const datas = useDatas();
-  const rate = useRate();
+  
   const {
     titleEntertainment,
     entertainments_back,
     title,
     nameForSearchButton,
   } = datas;
-  const { cur_rate, cur_scale } = rate;
-
+  
     const entertainmentCardsSettings = {
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -71,38 +69,49 @@ const Entertainment = () => {
 
     let slider = useRef<Slider | null>(null);
 
-    return (
-        <>
-            <FaceBlock title={titleEntertainment} image={entertainments_back}/>
-            <HomeBlockTemplate title="">
-                <div className={styles.container}>
-                    {data ? (
-                        <div>
-                            <Carousel settings={entertainmentCardsSettings} slider={slider}>
-                                {data.map((element) => (
-                                    <EntertainmentBigCard
-                                        key={element.id}
-                                        cur_rate={cur_rate}
-                                        cur_scale={cur_scale}
-                                        {...element}
-                                    />
-                                ))}
-                            </Carousel>
-                        </div>
-                    ) : (
-                        <div className={styles.preload}>
-                            <BeatLoader color="#583711"/>
-                        </div>)
-                    }
-                </div>
-            </HomeBlockTemplate>
-            <HomeBlockTemplate>
-                <ToFormButton value={title}
-                        buttonValue={nameForSearchButton}
-                />
-            </HomeBlockTemplate>
-        </>
-    );
+  return (
+    <>
+      <FaceBlock title={titleEntertainment} image={entertainments_back} />
+      <HomeBlockTemplate title="">
+        <div className={styles.container}>
+          {data ? (
+            <div>
+              <Carousel settings={entertainmentCardsSettings} slider={slider}>
+                {data.map((element) => (
+                  <EntertainmentBigCard
+                    key={element.id}
+                    {...element}
+                  />
+                ))}
+              </Carousel>
+              <div className={styles.blockNav}>
+                <button
+                  type="button"
+                  className={styles["slide-m-prev"]}
+                  onClick={() => slider.current?.slickPrev()}
+                ></button>
+                <button
+                  type="button"
+                  className={styles["slide-m-next"]}
+                  onClick={() => slider.current?.slickNext()}
+                ></button>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.preload}>
+              <BeatLoader color="#583711" />
+            </div>
+          )}
+        </div>
+      </HomeBlockTemplate>
+      <HomeBlockTemplate>
+        <ToFormButton
+          value={title}
+          buttonValue={nameForSearchButton}
+        />
+      </HomeBlockTemplate>
+    </>
+  );
 };
 
 export default Entertainment;

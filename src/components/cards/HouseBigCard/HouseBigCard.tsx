@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 // import { BigBed } from "../../../assets/icons/features/BigBed";
 import { Person } from "../../../assets/icons/features/Person";
 import { openFormStateAction } from "../../../reduxTools/formForOrderHouse/actions";
+import { GetPrice } from "../../../services/getPrice";
+import { useRate } from "../../../services/useRate";
 import { House } from "../../../types";
 import { MainButton } from "../../buttons/mainButton/MainButton";
 import Carousel from "../../Carousel";
@@ -11,12 +13,7 @@ import Price from "../../Price";
 
 import styles from "./HouseBigCard.module.scss";
 
-interface IProps extends House {
-  cur_scale: number;
-  cur_rate: number;
-}
-
-const HouseBigCard = (props: IProps) => {
+const HouseBigCard = (props: House) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const housePhotosSettings = {
@@ -48,17 +45,19 @@ const HouseBigCard = (props: IProps) => {
     pers_num,
     bed_count,
     beds_types,
-    rooms_types,
-    cur_rate,
-    cur_scale,
+    rooms_types    
   } = props;
-  const priceBYN_weekday = price_weekday
-    ? Math.round(((Number(price_weekday) / cur_scale) * cur_rate) / 10) * 10
-    : 0;
+  const currency = useRate().currency;
+  
+    const priceBYN_weekday = price_weekday
+    ? currency==="BYN"? Math.round(price_weekday)
+      : Math.round(+GetPrice(+price_weekday) / 10)* 10
+      : 0;
 
-  const priceBYN_holiday = price_holiday
-    ? Math.round(((Number(price_holiday) / cur_scale) * cur_rate) / 10) * 10
-    : priceBYN_weekday;
+    const priceBYN_holiday = price_holiday
+    ? currency==="BYN"? Math.round(price_holiday)
+    : Math.round(+GetPrice(+price_holiday) / 10)* 10
+    : price_weekday;
 
   return (
     <div className={styles.card}>
@@ -110,10 +109,10 @@ const HouseBigCard = (props: IProps) => {
             <p className={styles.priceText}>За дом в сутки:</p>
             <div className={styles.priceWrapper}>
               <div className={styles.priceContainer}>
-                <Price price={priceBYN_weekday} type="weekday" />
+                <Price price={+priceBYN_weekday} type="weekday" />
               </div>
               <div className={styles.priceContainer}>
-                <Price price={priceBYN_holiday} type="weekend" />
+                <Price price={+priceBYN_holiday} type="weekend" />
               </div>
             </div>
           </div>

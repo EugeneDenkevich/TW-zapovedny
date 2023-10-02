@@ -14,6 +14,7 @@ import {
   useGetObjectCurrentQuery,
 } from "../../reduxTools/requests/apiRequests";
 import { getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
+import { GetPrice } from "../../services/getPrice";
 import { useDatas } from "../../services/useDatas";
 import { useRate } from "../../services/useRate";
 
@@ -25,20 +26,15 @@ export const HouseItem = () => {
   const { data: meal } = useGetFeedingInfoQuery();
   const datas = useDatas();
   const { title, nameForSearchButton } = datas;
-  const rate = useRate();
+  const currency = useRate().currency;
   const price_weekday = data?.price_weekday
-    ? `от ${
-        Math.round(
-          ((Number(data.price_weekday) / rate.cur_scale) * rate.cur_rate) / 10,
-        ) * 10
-      } BYN будние дни`
-    : "цену уточняйте";
+    ? currency==="BYN"? `от ${Math.round(data.price_weekday)} BYN будние дни`
+      :`от ${ Math.round(+GetPrice(data.price_weekday) / 10)* 10} BYN будние дни`
+      : "цену уточняйте";
+
   const price_holiday = data?.price_holiday
-    ? `от ${
-        Math.round(
-          ((Number(data.price_holiday) / rate.cur_scale) * rate.cur_rate) / 10,
-        ) * 10
-      } BYN выходные дни`
+    ? currency==="BYN"? `от ${Math.round(data.price_holiday)} BYN выходные дни`
+    : `от ${ Math.round(+GetPrice(data.price_holiday) / 10)* 10} BYN выходные дни`
     : price_weekday;
 
   if (!data)
@@ -125,9 +121,7 @@ export const HouseItem = () => {
                 </div>
                 {meal && (
                   <LittleKitchenCard
-                    data={meal}
-                    cur_rate={rate.cur_rate}
-                    cur_scale={rate.cur_scale}
+                    data={meal}                    
                   />
                 )}
               </div>

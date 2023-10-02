@@ -32,9 +32,9 @@ export const Gallery = () => {
     if (!value && data) {
         data[0].photos.map((el) => photosData.push(el))
     } else {
-        data && data.map((el) => {
+        data && data.map((el) =>{
 
-            if (value == el.title) {
+            if (value === el.title) {
                 el.photos.map((el) => photosData.push(el))
             }
         })

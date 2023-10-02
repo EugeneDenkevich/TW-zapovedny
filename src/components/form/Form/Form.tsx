@@ -104,7 +104,7 @@ export const Form = () => {
                 setMyClass("success wrapper")
                 setModalContent("Заявка отправлена. В ближайшее время мы свяжемся с Вами для уточнения деталей " +
                     "брони. Спасибо что Вы с нами.")
-                setTimeout(() => setOpenModal(false), 12000)
+                setTimeout(() => setOpenModal(false), 4000)
                 reset(defaultValues);
                 dispatch(closeFormStateAction())
             })
@@ -113,7 +113,7 @@ export const Form = () => {
                 setOpenModal(true);
                 setMyClass("danger wrapper");
                 setModalContent(getErrorText(error.data?.detail))
-                setTimeout(() => setOpenModal(false), 12000)
+                setTimeout(() => setOpenModal(false), 4000)
             })
     };
     const [isOpenPolicy, setIsOpenPolicy] = useState(false);

@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 
 import { Arrow } from "../../assets/icons/Arrow";
-import { openFormStateAction } from "../../reduxTools/formForOrderHouse/actions";
+import { closeFormStateAction,openFormStateAction } from "../../reduxTools/formForOrderHouse/actions";
 import { useGetObjectsQuery } from "../../reduxTools/requests/apiRequests";
 import { AppState } from "../../reduxTools/store";
 import { Footer } from "../Footer";
@@ -45,12 +45,16 @@ export const Layout = () => {
     if (pathname.includes("form") && !isFormOpen) {
       dispatch(openFormStateAction());
     }
+    if(!pathname.includes("form") && isFormOpen){
+      dispatch(closeFormStateAction());
+      window.location.reload()
+    }
   }, [dispatch, pathname, isFormOpen]);
 
   if (data === undefined) {
     return null;
   }
-
+  
   return (
     <div className={styles.layout}>
       <Header visible={visible} />
@@ -66,6 +70,7 @@ export const Layout = () => {
       <div className={isFormOpen ? styles.container : styles.hide}>
         <FormContainer />
       </div>
+      
     </div>
   );
 };
