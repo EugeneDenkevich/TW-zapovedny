@@ -60,7 +60,7 @@ export const ContactsInfo = (props: IProps) => {
         <div className={styles.phones}>{phones}</div>
         <div className={styles.socials}>
           <a
-            href={data && data[0].social[1].Facebook}
+            href={data && data[0].social[0].Facebook}
             target="_blank"
             rel="noreferrer"
           >

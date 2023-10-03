@@ -15,7 +15,7 @@ import {
   Purchases,
 } from "../../types";
 
-const URL = `https://eugenest.vh77.hosterby.com/api/`;
+const URL = `https://api.zapovedny.travelweb.dev/api/`;
 
 export const api = createApi({
   reducerPath: "api",
