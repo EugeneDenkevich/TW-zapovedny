@@ -27,47 +27,47 @@ export const getFeaturesIcon = (
   switch (id) {
     case 1:
       return Internet({ littleIcon });
+    case 2:
+      return Parking({ littleIcon });
     case 3:
       return Terrace({ littleIcon });
     case 4:
-      return Patio({ littleIcon });
-    case 5:
       return Balcony({ littleIcon });
-    case 6:
-      return Dishes({ littleIcon });
-    case 7:
-      return Hairdryer({ littleIcon });
-    case 8:
-      return Iron({ littleIcon });
-    case 9:
-      return WashingMaсhine({ littleIcon });
-    case 10:
-      return Stove({ littleIcon });
-    case 11:
-      return Microwave({ littleIcon });
-    case 12:
-      return Dishwasher({ littleIcon });
-    case 13:
-      return Shower({ littleIcon });
-    case 14:
-      return BabyBed({ littleIcon });
-    case 15:
-      return NoSmoking({ littleIcon });
-    case 17:
-      return PersonalPier({ littleIcon });
-    case 18:
-      return Parking({ littleIcon });
-    case 19:
-      return KitchenIcon({ littleIcon });
-    case 20:
-      return TV({ littleIcon });
-    case 21:
-      return Fridge({ littleIcon });
-    case 22:
+    case 5:
       return Conditioner({ littleIcon });
-    case 24:
+    case 6:
+      return TV({ littleIcon });
+    case 7:
+        return Patio({ littleIcon });
+    case 8:
       return Mangal({ littleIcon });
-
+    case 9:
+      return PersonalPier({ littleIcon });
+    case 10:
+      return KitchenIcon({ littleIcon });
+    case 11:
+      return Fridge({ littleIcon });
+    case 12:
+      return Dishes({ littleIcon });
+    case 13:
+      return Stove({ littleIcon });
+    case 14:
+      return Microwave({ littleIcon });
+    case 15:
+      return Dishwasher({ littleIcon });
+    case 16:
+      return BabyBed({ littleIcon });
+    case 17:
+      return NoSmoking({ littleIcon });
+    case 18:
+      return Shower({ littleIcon });
+    case 19:
+      return WashingMaсhine({ littleIcon });
+    case 20:
+      return Iron({ littleIcon });
+    case 21:
+      return Hairdryer({ littleIcon });
+      
     default:
       return null;
   }
@@ -77,46 +77,46 @@ export const getFeaturesText = (id: number): string | null => {
   switch (id) {
     case 1:
       return "Бесплатный Wi-Fi";
-    case 3:
-      return "Терраса";
-    case 4:
-      return "Патио";
-    case 5:
-      return "Балкон";
-    case 6:
-      return "Посуда";
-    case 7:
-      return "Фен";
-    case 8:
-      return "Утюг";
-    case 9:
-      return "Стиральная машина";
-    case 10:
-      return "Плита";
-    case 11:
-      return "Микроволновая печь";
-    case 12:
-      return "Посудомоечная машина";
-    case 13:
-      return "Душ/ванна";
-    case 14:
-      return "Мебель для грудных детей";
-    case 15:
-      return "Курение в помещении запрещено";
-    case 17:
-      return "Личный пирс";
-    case 18:
+    case 2:
       return "Бесплатная парковка";
-    case 19:
-      return "Кухня";
-    case 20:
-      return "Телевизор";
-    case 21:
-      return "Холодильник";
-    case 22:
+    case 3:
+      return "Терраса";    
+    case 4:
+      return "Балкон";
+    case 5:
       return "Кондиционер";
-    case 24:
+    case 6:
+      return "Телевизор";    
+    case 7:
+      return "Патио";
+    case 8:
       return "Мангал";
+    case 9:
+      return "Личный пирс";
+    case 10:
+      return "Кухня";
+    case 11:
+      return "Холодильник";
+    case 12:
+        return "Посуда";
+    case 13:
+      return "Плита";
+    case 14:
+      return "Микроволновая печь";
+    case 15:
+      return "Посудомоечная машина";
+    case 16:
+      return "Мебель для грудных детей";
+    case 17:
+      return "Курение в помещении запрещено";
+    case 18:
+      return "Душ/ванна";
+    case 19:
+        return "Стиральная машина";  
+    case 20:
+      return "Утюг";
+    case 21:
+      return "Фен";
 
     default:
       return null;

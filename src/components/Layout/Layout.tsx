@@ -13,12 +13,8 @@ import { Header } from "../Header";
 import styles from "./Layout.module.scss";
 
 export const Layout = () => {
-  const { data } = useGetObjectsQuery();
-
-  // const burgerIsOpen = useSelector(
-  //   (state: AppState) => state.burgerMenu.isOpen,
-  // );
-
+  const { data } = useGetObjectsQuery();  
+  
   const isFormOpen = useSelector((state: AppState) => state.form.isFormOpen);
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
@@ -40,7 +36,7 @@ export const Layout = () => {
       }
     });
   }, []);
-
+  
   useEffect(() => {
     if (pathname.includes("form") && !isFormOpen) {
       dispatch(openFormStateAction());

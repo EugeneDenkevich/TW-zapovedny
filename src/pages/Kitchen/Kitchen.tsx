@@ -14,6 +14,7 @@ import {
   useGetFeedingInfoQuery,
 } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
+import { useRate } from "../../services/useRate";
 import { IMeal } from "../../types";
 
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
@@ -25,6 +26,7 @@ export const Kitchen = () => {
   const { data: dishes } = useGetDishesQuery();
   const datas = useDatas();  
   const { title, titleKitchen, kitchen_back, nameForSearchButton } = datas;
+  const { currency, cur_rate, cur_scale } = useRate();
   
     const kitchenCardsSettings = {
         arrows: false,
@@ -73,10 +75,10 @@ export const Kitchen = () => {
                     return (
                       <MealTimeCard
                         key={el.id}
-                        id={el.id}
-                        time={el.time}
-                        title={el.title}
-                        price={el.price}                        
+                        currency = {currency}
+                        cur_scale = {cur_scale}
+                        cur_rate = {cur_rate}
+                        {...el}
                       />
                     );
                   })}
@@ -86,6 +88,9 @@ export const Kitchen = () => {
             <div className={styles["meal-time-block"]}>
               {meal && (
                 <LittleKitchenCard
+                  cur_rate = {cur_rate}
+                  currency = {currency}
+                  cur_scale = {cur_scale}
                   data={meal}                  
                 />
               )}

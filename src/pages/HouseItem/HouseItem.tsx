@@ -14,7 +14,6 @@ import {
   useGetObjectCurrentQuery,
 } from "../../reduxTools/requests/apiRequests";
 import { getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
-import { GetPrice } from "../../services/getPrice";
 import { useDatas } from "../../services/useDatas";
 import { useRate } from "../../services/useRate";
 
@@ -26,17 +25,21 @@ export const HouseItem = () => {
   const { data: meal } = useGetFeedingInfoQuery();
   const datas = useDatas();
   const { title, nameForSearchButton } = datas;
-  const currency = useRate().currency;
-  const price_weekday = data?.price_weekday
-    ? currency==="BYN"? `от ${Math.round(data.price_weekday)} BYN будние дни`
-      :`от ${ Math.round(+GetPrice(data.price_weekday) / 10)* 10} BYN будние дни`
-      : "цену уточняйте";
 
+  const { currency, cur_rate, cur_scale } = useRate();
+    
+  const price_weekday = data?.price_weekday
+    ? currency==="BYN"? data.price_weekday
+      : (Math.round((+data.price_weekday / cur_scale) * cur_rate)/ 10)* 10       
+      : null;
+  const price_weekdayScreen = price_weekday? `от ${price_weekday} BYN будние дни` : "цену уточняйте"
+      
   const price_holiday = data?.price_holiday
-    ? currency==="BYN"? `от ${Math.round(data.price_holiday)} BYN выходные дни`
-    : `от ${ Math.round(+GetPrice(data.price_holiday) / 10)* 10} BYN выходные дни`
+    ? currency==="BYN"? data.price_holiday
+    : (Math.round((+data.price_holiday / cur_scale) * cur_rate)/ 10)* 10      
     : price_weekday;
 
+    const price_holidayScreen = price_holiday? `от ${price_holiday} BYN выходные дни` : "цену уточняйте"
   if (!data)
     return (
       <div className={styles.preload}>
@@ -60,7 +63,7 @@ export const HouseItem = () => {
                   </div>
                   <div className={styles["beds-container"]}>
                     {data.rooms_types &&
-                      data.rooms_types.map((el, index) => {
+                      data.rooms_types.map((el, index)=>{
                         for (let i = 0; i < 2; i++) {
                           if (el.type === "Спальня") {
                             return (
@@ -116,12 +119,15 @@ export const HouseItem = () => {
                 </div>
                 <div className={styles.prices}>
                   <FlagItem value="За дом в сутки" className={styles.flag} />
-                  <div className={styles.row}>{price_weekday}</div>
-                  <div className={styles.row}>{price_holiday}</div>
+                  <div className={styles.row}>{price_weekdayScreen}</div>
+                  <div className={styles.row}>{price_holidayScreen}</div>
                 </div>
                 {meal && (
                   <LittleKitchenCard
-                    data={meal}                    
+                  currency = {currency}
+                  cur_rate = {cur_rate}
+                  cur_scale = {cur_scale}
+                  data={meal}                    
                   />
                 )}
               </div>

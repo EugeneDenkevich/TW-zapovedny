@@ -26,8 +26,8 @@ export const ContactsInfo = (props: IProps) => {
   const { hideLogo = false, className } = props;
   const { data } = useGetInfoQuery();
   const phones = data
-    ? data[0].phones.map((item) => {
-        return <p key={item}>{item}</p>;
+    ? data[0].phones.map((item, index) => {
+        return <p key={index}>{item}</p>;
       })
     : null;
   return (

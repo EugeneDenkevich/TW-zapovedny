@@ -1,15 +1,28 @@
 import { PriceIcon } from "../../../assets/icons/Price";
 import { TimeIcon } from "../../../assets/icons/Time";
-import { GetPrice } from "../../../services/getPrice";
 import { IMeal } from "../../../types";
 
 import styles from "./LittleMealTimeCard.module.scss";
 
-export const LittleMealTimeCard = (props: IMeal) => {
-  const { time, title, price } = props;
-  const priceBYN = price
-    ? `${GetPrice(Number(price))} BYN`
+interface  MyProps extends IMeal {
+  currency: string,
+  cur_scale: number,
+  cur_rate: number
+} 
+
+export const LittleMealTimeCard = (props: MyProps) => {
+  const { time, title, price, currency, cur_rate, cur_scale } = props;
+
+  const priceBYN = price 
+  ? currency==="BYN"
+  ? price
+  : Math.round((+price / cur_scale) * cur_rate)
+  :null
+  
+  const priceScreen = priceBYN
+    ? `${priceBYN} BYN`
     : "цену уточняйте";
+
   return (
     <div className={styles.card}>
       <p className={styles.title}>{title}</p>
@@ -25,7 +38,7 @@ export const LittleMealTimeCard = (props: IMeal) => {
             <PriceIcon />
           </div>
           <p>
-            <span>{priceBYN}</span>
+            <span>{priceScreen}</span>
           </p>
         </div>
       </div>
