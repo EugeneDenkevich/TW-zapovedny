@@ -1,37 +1,37 @@
-import styles from "./Home.module.scss";
-import {Container} from "../../components/Container/Container";
-import {KitchenCard} from "../../components/cards/KitchenCard";
-import {MainButton} from "../../components/buttons/mainButton/MainButton";
-import BackgroundBlockImage from "../../components/BackgroundBlockImage";
-import {ToFormButton} from './../../components/buttons/toFormButton';
-import {HomeBlockTemplate} from "../../components/HomeBlockTemplate/HomeBlockTemplate";
-import {HouseLittleCard} from "../../components/cards/HouseLittleCard";
-import {Carousel} from "../../components/Carousel/Carousel";
-import {EntertainmentCard} from "../../components/cards/EntertainmentCard/EntertainmentCard";
-import {useState} from "react";
-import {Settings} from "react-slick";
-import {
-  useGetDishesQuery, useGetEntertainmentsQuery, useGetObjectsQuery,
-  useGetMainPageQuery
-} from "../../reduxTools/requests/apiRequests";
+// import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDatas} from "../../services/useDatas"
-import {useRate} from "../../services/useRate";
+import {Settings} from "react-slick";
 import {BeatLoader} from "react-spinners";
 
+import BackgroundBlockImage from "../../components/BackgroundBlockImage";
+import {MainButton} from "../../components/buttons/mainButton/MainButton";
+import {EntertainmentCard} from "../../components/cards/EntertainmentCard/EntertainmentCard";
+import {HouseLittleCard} from "../../components/cards/HouseLittleCard";
+import {KitchenCard} from "../../components/cards/KitchenCard";
+import {Carousel} from "../../components/Carousel/Carousel";
+import {Container} from "../../components/Container/Container";
+import {HomeBlockTemplate} from "../../components/HomeBlockTemplate/HomeBlockTemplate";
+import {
+  useGetDishesQuery, useGetEntertainmentsQuery, useGetMainPageQuery,
+useGetObjectsQuery} from "../../reduxTools/requests/apiRequests";
+import {useDatas} from "../../services/useDatas"
+import { useRate } from "../../services/useRate";
+
+import {ToFormButton} from './../../components/buttons/toFormButton';
+
+import styles from "./Home.module.scss";
+
 export const Home = () => {
-  const [imageIndex, setImageIndex] = useState<number>(0);
-  const {data: houses, isLoading: houseLoad} = useGetObjectsQuery();
-  const {data: dishes, isLoading: dishLoad} = useGetDishesQuery();
-  const {data: entertainments, isLoading: entLoad} = useGetEntertainmentsQuery();
-  const {data: mainPage, isLoading: pageLoad} = useGetMainPageQuery();
+  // const [imageIndex, setImageIndex] = useState<number>(0);
+  const {data: houses} = useGetObjectsQuery();
+  const {data: dishes} = useGetDishesQuery();
+  const {data: entertainments} = useGetEntertainmentsQuery();
+  const {data: mainPage} = useGetMainPageQuery();
   const navigate = useNavigate();
   const datas = useDatas();
-  const rate = useRate();
-
+  const {currency, cur_rate, cur_scale} = useRate();
   const {title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton} = datas;
-  const {cur_rate, cur_scale} = rate;
-
+  
   const sliderFaceBlockSettings: Settings = {
     slidesToShow: 1,
     centerPadding: "137px",
@@ -134,7 +134,7 @@ export const Home = () => {
               <div className={styles["right-side"]}>
                 <Carousel settings={sliderFaceBlockSettings}>
                   {mainPage && mainPage[0].photos.map((el, index) => {
-                    return <img key={index.toString()} src={el} alt="image"/>;
+                    return <img key={index.toString()} src={el} alt="pict"/>;
                   })}
                 </Carousel>
               </div>
@@ -154,16 +154,10 @@ export const Home = () => {
                   {houses.map((el) => (
                       <HouseLittleCard
                           key={el.id}
-                          id={el.id}
-                          pers_num={el.pers_num}
-                          title={el.title}
-                          description_short={el.description_short}
-                          photos={el.photos}
-                          price_weekday={el.price_weekday}
-                          beds_types={el.beds_types}
-                          rooms_types={el.rooms_types}
-                          cur_scale={cur_scale}
-                          cur_rate={cur_rate}
+                          currency = {currency}
+                          cur_scale = {cur_scale}
+                          cur_rate = {cur_rate} 
+                          {...el}
                       />
                   ))}
                 </Carousel>) : (

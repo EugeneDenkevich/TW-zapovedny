@@ -7,6 +7,16 @@ interface IProps {
 
 const Price = (props: IProps) => {
   const { type, price } = props;
+  if (!price || price===0){
+    return (
+      <div className={styles.container}>
+      <div className={styles.price}>
+        <span> цену уточняйте </span>
+      </div>
+      
+    </div>
+    )
+  }
   return (
     <div className={styles.container}>
       <div className={styles.price}>

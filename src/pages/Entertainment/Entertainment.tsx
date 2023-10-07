@@ -8,6 +8,7 @@ import { FaceBlock } from "../../components/FaceBlock";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
 import { useGetEntertainmentsQuery } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
+import { useRate } from "../../services/useRate";
 
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
@@ -16,6 +17,7 @@ import styles from "./Entertainment.module.scss";
 const Entertainment = () => {
   const { data } = useGetEntertainmentsQuery();
   const datas = useDatas();
+  const { currency, cur_rate, cur_scale } = useRate();
   
   const {
     titleEntertainment,
@@ -80,6 +82,9 @@ const Entertainment = () => {
                 {data.map((element) => (
                   <EntertainmentBigCard
                     key={element.id}
+                    currency = {currency}
+                    cur_scale = {cur_scale}
+                    cur_rate = {cur_rate} 
                     {...element}
                   />
                 ))}

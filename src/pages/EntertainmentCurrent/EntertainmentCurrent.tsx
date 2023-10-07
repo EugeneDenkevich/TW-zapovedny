@@ -7,8 +7,8 @@ import { FaceBlock } from "../../components/FaceBlock";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
 import { MyGallery } from "../../components/ImageGalleryCarousel";
 import { useGetEntertainmentsCurrentQuery } from "../../reduxTools/requests/apiRequests";
-import { GetPrice } from "../../services/getPrice";
 import { useDatas } from "../../services/useDatas";
+import { useRate } from "../../services/useRate";
 
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
@@ -18,7 +18,7 @@ const EntertainmentCurrent = () => {
   const { id } = useParams();
   const { data } = useGetEntertainmentsCurrentQuery(id!);
   const datas = useDatas();
-  
+  const { currency, cur_rate, cur_scale } = useRate();
   const {
     titleEntertainment,
     entertainments_back,
@@ -37,12 +37,18 @@ const EntertainmentCurrent = () => {
     data.prices && data.prices[0] ? (
       data.prices.map((el, index) => {
         for (let key in el) {
+          const priceBYN = el[key] 
+          ? currency==="BYN"
+          ? el[key]
+          : Math.round((+el[key] / cur_scale) * cur_rate)
+          :null
+
           const priceItem =
             +el[key]  > 0
-              ? `${GetPrice(el[key])} BYN`
-              : "бесплатно";
+              ? `${priceBYN} BYN`
+              : "бесплатно"
           return (
-            <React.Fragment key={key}>
+            <React.Fragment key={index}>
               <div>{key}</div>
               <div className={styles.numberPrice}>{priceItem} </div>
             </React.Fragment>

@@ -4,11 +4,14 @@ import { LittleMealTimeCard } from "../LittleMealTimeCard";
 import styles from "./LittleKitchenCard.module.scss";
 
 interface IProps {
-  data: IMeal[]; 
+  data: IMeal[];
+  currency: string,
+  cur_scale: number,
+  cur_rate: number 
 }
 
 export const LittleKitchenCard = (props: IProps) => {
-  const { data} = props;
+  const { data, currency, cur_scale, cur_rate} = props;
   return (
     <div className={styles.kitchen}>
       <h2>Кухня</h2>
@@ -16,11 +19,12 @@ export const LittleKitchenCard = (props: IProps) => {
         data.map((el: IMeal) => {
           return (
             <LittleMealTimeCard
-              id={el.id}
+              currency = {currency}
+              cur_rate = {cur_rate}
+              cur_scale = {cur_scale}
               key={el.id}
-              title={el.title}
-              time={el.time}
-              price={el.price}              
+              {...el}
+              
             />
           );
         })}

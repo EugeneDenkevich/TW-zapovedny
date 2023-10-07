@@ -29,7 +29,7 @@ export const Gallery = () => {
     };
 
     let photosData: string[] = []
-    if (!value && data) {
+    if (!value && data && data.length>0) {
         data[0].photos.map((el) => photosData.push(el))
     } else {
         data && data.map((el) =>{
@@ -40,7 +40,7 @@ export const Gallery = () => {
         })
     }
     ;
-
+    
     const bigGallerySettings = {
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -138,7 +138,9 @@ export const Gallery = () => {
     }
 
     useEffect(() => {
-        setValue(data && data[0].title);
+        if(data && data.length>0){
+        setValue(data[0].title);
+        }
     }, [data]);
 
     function handleEsc(event: KeyboardEvent) {
@@ -151,7 +153,7 @@ export const Gallery = () => {
 
     useEffect(() => {
         slider.current?.slickGoTo(0)
-    }, [data && data])
+    }, [data ])
 
 
     useEffect(() => {
@@ -160,12 +162,18 @@ export const Gallery = () => {
             window.removeEventListener("keydown", handleEsc);
         };
     }, []);
-
+    if (!data || data.length===0){
+        return(
+            <div className={styles.cap}>
+                Скоро здесь будут наши фотографии
+            </div>
+        )
+    }
     return (
         <>
             <HomeBlockTemplate title="">
                 <div className={styles["tabs-grid"]}>
-                    {data &&
+                    {data && data.length>0 &&
                         data.map((el) => {
                             return (
                                 <div

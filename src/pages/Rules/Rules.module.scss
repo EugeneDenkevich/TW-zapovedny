@@ -1,5 +1,5 @@
 @import "../../styles/varaibles.scss";
-
+@import "../../styles/mixins.scss";
 .rules-block {
   width: 100%;
   display: grid;
@@ -22,4 +22,8 @@
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
+}
+.cap {
+  @include text($text-color, 20px, 500, 24px, none);
+  padding: 10px;
 }

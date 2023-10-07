@@ -6,6 +6,7 @@ import { FaceBlock } from "../../components/FaceBlock/FaceBlock";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
 import { useGetObjectsQuery } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
+import { useRate } from "../../services/useRate";
 import { House } from "../../types";
 
 import styles from "./Houses.module.scss";
@@ -13,6 +14,7 @@ import styles from "./Houses.module.scss";
 export const Houses = () => {
   const { data } = useGetObjectsQuery();
   const datas = useDatas();
+  const { currency, cur_rate, cur_scale } = useRate();
   
   const { title, titleHouse, house_back, nameForSearchButton } = datas;
   
@@ -25,20 +27,11 @@ export const Houses = () => {
             data.map((house: House) => {
               return (
                 <HouseBigCard
+                  {...house}
                   key={house.id}
-                  id={house.id}
-                  title={house.title}
-                  description_short={house.description_short}
-                  description_long={house.description_long}
-                  photos={house.photos}
-                  price_weekday={house.price_weekday}
-                  price_holiday={house.price_holiday}
-                  features={house.features}
-                  pers_num={house.pers_num}
-                  bed_count={house.bed_count}
-                  beds_types={house.beds_types}
-                  rooms_types={house.rooms_types}
-                  
+                  currency = {currency}
+                  cur_scale = {cur_scale}
+                  cur_rate={cur_rate} 
                 />
               );
             })

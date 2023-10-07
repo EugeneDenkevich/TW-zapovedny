@@ -174,3 +174,7 @@
 .preload {
   text-align: center;
 }
+.cap {
+  @include text($text-color, 20px, 500, 24px, none);
+  padding: 30px;
+}

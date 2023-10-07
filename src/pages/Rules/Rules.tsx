@@ -17,6 +17,11 @@ export const Rules = () => {
             data.map((el, index) => {
               return <RuleCard key={index} content={el.content} />;
             })}
+          { (!data||data.length===0)  &&
+            <div className={styles.cap}>
+               Скоро здесь будет информация 
+            </div>
+          }  
         </div>
       </HomeBlockTemplate>
       <HomeBlockTemplate>

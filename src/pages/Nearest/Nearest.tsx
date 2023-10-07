@@ -1,13 +1,15 @@
-import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
-import {HomeBlockTemplate} from "../../components/HomeBlockTemplate";
-import {NearestCard} from "../../components/cards/NearestCard";
-import {useGetNearestsQuery} from "../../reduxTools/requests/apiRequests";
-import styles from "./Nearest.module.scss";
-import {BeatLoader} from "react-spinners";
-import Carousel from "../../components/Carousel";
 import React, {createRef, useEffect, useRef} from "react";
 import Slider from "react-slick";
-import {log} from "util";
+import {BeatLoader} from "react-spinners";
+
+import {NearestCard} from "../../components/cards/NearestCard";
+import Carousel from "../../components/Carousel";
+import {HomeBlockTemplate} from "../../components/HomeBlockTemplate";
+import {useGetNearestsQuery} from "../../reduxTools/requests/apiRequests";
+
+import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
+
+import styles from "./Nearest.module.scss";
 
 const Nearest = () => {
     const {data} = useGetNearestsQuery();
@@ -58,22 +60,26 @@ const Nearest = () => {
     // useEffect(() => {
     //     console.log(slider.current)
     // }, [slider])
-    console.log (data)
+   
     return (
         <>
             <HomeBlockTemplate title="">
                 <div className={styles.container}>
-                    {data ? (
+                {!data ?(
+                        <div className={styles.preload}>
+                            <BeatLoader color="#583711"/>
+                        </div>
+                    ):data.length===0?(
+                     <div className={styles.cap}>
+                         Скоро здесь будет информация 
+                    </div>
+                    ):(
                             <Carousel settings={nearestCardsSettings} slider={slider}>
                                 {data.map((nearestCard) => (
                                     <NearestCard key={nearestCard.id} element={nearestCard}/>
                                 ))}
                             </Carousel>
-                        ) : (
-                        <div className={styles.preload}>
-                            <BeatLoader color="#583711"/>
-                        </div>
-                    )}
+                        ) }
                 </div>
             </HomeBlockTemplate>{" "}
             <HomeBlockTemplate>
