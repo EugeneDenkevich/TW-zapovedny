@@ -16,7 +16,7 @@ export function  useRate () {
   
   const currency =  data ? data[0].currency.toUpperCase() : "BYN";
   useEffect(() => {
-    if (data ) {
+    if (data && currency!=="BYN") {
       setIsSkip(false);
     }
   }, [currency, data]);
