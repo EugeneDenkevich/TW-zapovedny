@@ -109,7 +109,7 @@ export const Form = () => {
                 dispatch(closeFormStateAction())
             })
             .catch((error) => {
-                console.log(error)
+                
                 setOpenModal(true);
                 setMyClass("danger wrapper");
                 setModalContent(getErrorText(error.data?.detail))

@@ -70,7 +70,7 @@ const Entertainment = () => {
     };
 
     let slider = useRef<Slider | null>(null);
-
+    console.log(data)
   return (
     <>
       <FaceBlock title={titleEntertainment} image={entertainments_back} />
