@@ -19,7 +19,7 @@ export const useDatas = () => {
   const entertainments_back = backPhotos ? backPhotos[0].photo_e : "";
 
   // Название для кнопки поиска объекта
-  const nameForSearchButton = "Найти домик";
+  const nameForSearchButton = "Забронировать";
 
   return {
     title,
