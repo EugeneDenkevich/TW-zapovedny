@@ -21,6 +21,8 @@ const Modal = (props: IProps) => {
   const { myClass, content, onClose, isOpen } = props;
   const element = useMemo(() => document.createElement("div"), []);
 
+  const text = content.split(".");
+
   useEffect(() => {
     if (isOpen) {
       modalRootElement?.appendChild(element);
@@ -35,7 +37,11 @@ const Modal = (props: IProps) => {
       <div className="modal_container">
         <div className={myClass}>
           {myClass === "success wrapper" ? <CheckIcon /> : <AlertCircle />}
-          <div className="content">{content}</div>
+          <div>
+            {text[0] ? <p className="content">{`${text[0]}.`}</p> : null}
+            {text[1] ? <p className="content">{`${text[1]}.`}</p> : null}
+            {text[2] ? <p className="content">{`${text[2]}.`}</p> : null}
+          </div>
           <CloseIcon onClick={onClose} />
         </div>
       </div>,
