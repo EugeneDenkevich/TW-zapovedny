@@ -58,14 +58,12 @@ export const getFeaturesIcon = (
     case 16:
       return BabyBed({ littleIcon });
     case 17:
-      return NoSmoking({ littleIcon });
-    case 18:
       return Shower({ littleIcon });
-    case 19:
+    case 18:
       return WashingMaсhine({ littleIcon });
-    case 20:
+    case 19:
       return Iron({ littleIcon });
-    case 21:
+    case 20:
       return Hairdryer({ littleIcon });
       
     default:
@@ -108,14 +106,12 @@ export const getFeaturesText = (id: number): string | null => {
     case 16:
       return "Мебель для грудных детей";
     case 17:
-      return "Курение в помещении запрещено";
-    case 18:
       return "Душ/ванна";
-    case 19:
+    case 18:
         return "Стиральная машина";  
-    case 20:
+    case 19:
       return "Утюг";
-    case 21:
+    case 20:
       return "Фен";
 
     default:

@@ -8,6 +8,7 @@ interface IProps extends ClassName {
 
 export const FlagItem = (props: IProps) => {
   const { value, className } = props;
+  
   return (
     <div className={className ? `${styles.flag} ${className}` : styles.flag}>
       <p className={styles["flag-text"]}>{value}</p>
