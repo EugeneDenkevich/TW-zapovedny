@@ -30,7 +30,7 @@ export const HouseLittleCard = (props: MyProps) => {
       (Math.round((+price_weekday / cur_scale) * cur_rate)/ 10)* 10
       } BYN в сутки`
     : "цену уточняйте";
-      console.log(price_weekday)
+      
   return (
     <div className={styles.card}>
       <NavLink to={`houses/${id}`}>
