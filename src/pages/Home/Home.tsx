@@ -21,6 +21,19 @@ import {ToFormButton} from './../../components/buttons/toFormButton';
 
 import styles from "./Home.module.scss";
 
+export const DimensionsFunc = (src: string, setDimensions: (value: {width: number, height: number}) => void) => {
+  const img = new Image();
+
+  img.src = src;
+
+  img.onload = function () {
+    setDimensions({
+      width: img.width,
+      height: img.height
+    })
+  }
+};
+
 export const Home = () => {
   // const [imageIndex, setImageIndex] = useState<number>(0);
   const {data: houses} = useGetObjectsQuery();

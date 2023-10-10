@@ -5,6 +5,7 @@ import {FlagItem} from "../../FlagItem";
 
 import styles from "./HouseLittleCard.module.scss";
 import {useEffect, useState} from "react";
+import {DimensionsFunc} from "../../../pages/Home/Home";
 
 interface MyProps extends House {
     currency: string,
@@ -35,17 +36,8 @@ export const HouseLittleCard = (props: MyProps) => {
     const [dimensions, setDimensions] = useState({width: 0, height: 0});
 
     useEffect(() => {
-        const img = new Image();
-
-        img.src = photos[0];
-
-        img.onload = function () {
-            setDimensions({
-                width: img.width,
-                height: img.height
-            })
-        }
-    })
+        DimensionsFunc(photos[0], setDimensions)
+    });
 
     return (
         <div className={styles.card}>
