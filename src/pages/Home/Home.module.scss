@@ -224,13 +224,14 @@
   @include flex(column, center, flex-start, nowrap);
 
   @media (max-width: 768px) {
+    margin-top: 0px;
     padding-top: 0px;
   }
-  @media (max-width: 550px) {
-    padding-top: 25px;
+  @media (max-width: 450px) {
+    margin-top: 40px;
   }
   @media (max-width: 360px) {
-    padding-top: 35px;
+    margin-top: 60px;
   }
 
   .houses-carousel {
