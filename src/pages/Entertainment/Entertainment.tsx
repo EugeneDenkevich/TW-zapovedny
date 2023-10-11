@@ -38,7 +38,7 @@ const Entertainment = () => {
         ),
         appendDots: (dots: any) => <div className={styles.custom_padding}><ul>{dots}</ul></div>,
         infinite: true,
-        slidesPerRow: 3,
+        slidesPerRow: 2,
         arrows: false,
         touchMove: false,
         responsive: [
