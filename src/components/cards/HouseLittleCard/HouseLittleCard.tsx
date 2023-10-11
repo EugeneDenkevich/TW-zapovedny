@@ -49,5 +49,13 @@ export const HouseLittleCard = (props: MyProps) => {
                      }
             />
       </NavLink>
+        <div className={styles["text-content"]}>
+                <NavLink to={`houses/${id}`}>
+                    <h1>{title}</h1>
+                </NavLink>
+                <p>{description_short}</p>
+            </div>
+            <FlagItem value={priceBYN} className={styles.flag}/>
+        </div>
     );
 };
