@@ -273,6 +273,7 @@ $triangles-height: calc($height / 2);
 
       .grid-item {
         @include flex(row, flex-start, flex-start, nowrap);
+        font-size: smaller;
         gap: 20px;
       }
     }

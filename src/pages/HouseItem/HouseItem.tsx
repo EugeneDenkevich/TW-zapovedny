@@ -1,9 +1,7 @@
 import { useParams } from "react-router";
 import { BeatLoader } from "react-spinners";
 
-import { BigBed } from "../../assets/icons/features/BigBed";
 import { Person } from "../../assets/icons/features/Person";
-import { SingleBed } from "../../assets/icons/features/SingleBed";
 import { ToFormButton } from "../../components/buttons/toFormButton";
 import { LittleKitchenCard } from "../../components/cards/LittleKitchenCard";
 import { FaceBlock } from "../../components/FaceBlock/FaceBlock";
@@ -14,7 +12,8 @@ import {
   useGetFeedingInfoQuery,
   useGetObjectCurrentQuery,
 } from "../../reduxTools/requests/apiRequests";
-import { getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
+import { getBedsIcon, getBedsTitle } from "../../services/getBeds";
+import {  getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
 import { useDatas } from "../../services/useDatas";
 import { useRate } from "../../services/useRate";
 
@@ -112,12 +111,20 @@ export const HouseItem = () => {
                   <h2>Удобства в домике</h2>
                   <div className={styles.line}></div>
                   <div className={styles.grid}>
+
                     {data.beds_types && data.beds_types.length > 0 ? (
-                      <div className={styles["grid-item"]}>
-                        <BigBed littleIcon={true} /> {data.bed_count}{" "}
-                        {data.bed_count === 1 ? "кровать" : "кровати(ей)"}
+                      data.beds_types.map((elem) => {
+                        return(
+                        <div className={styles["grid-item"]} key={elem.id}>
+                        {getBedsIcon(elem.id, true)} {elem.count}
+                        {getBedsTitle(elem.id,+elem.count )}
+                        {/* {data.bed_count === 1 ? "кровать" : "кровати(ей)"} */}
                       </div>
+                        )
+                      })
+                      
                     ) : null}
+
                     {data.features?.map((elem, index) => {
                       return (
                         <div className={styles["grid-item"]} key={index}>
