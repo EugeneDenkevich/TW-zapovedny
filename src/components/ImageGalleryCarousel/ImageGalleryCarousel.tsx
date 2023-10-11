@@ -11,6 +11,12 @@ interface IProps {
 
 export const MyGallery = (props: IProps) => {
   const images: ImagesGallery[] = props.images.map((el) => {
+    const img = new Image();
+    img.src = el;
+
+    // @ts-ignore
+    (img.width - img.height) >=0 ? (img.style.objectFit = "cover") : (img.style.objectFit = "contain")
+
     return {
       original: el,
       thumbnail: el,

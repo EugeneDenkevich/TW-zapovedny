@@ -34,7 +34,7 @@ export const Kitchen = () => {
         slidesToScroll: 2,
         touchMove: false,
         speed: 900,
-        rows: 1,
+        row: 1,
         dots: true,
         dotsClass: 'custom_paging',
         customPaging: (i: number) => (
@@ -42,16 +42,17 @@ export const Kitchen = () => {
         ),
         appendDots: (dots: any) => <div className={styles.custom_padding}><ul>{dots}</ul></div>,
         infinite: true,
-        slidesPerRow: 6,
+        slidesPerRow: 4,
         responsive: [
             {
                 breakpoint: 550,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    touchMove: true,
                     infinite: true,
                     row: 1,
-                    slidesPerRow: 8,
+                    slidesPerRow: 6,
                 }
             }
         ]

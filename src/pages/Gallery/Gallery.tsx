@@ -29,10 +29,10 @@ export const Gallery = () => {
     };
 
     let photosData: string[] = []
-    if (!value && data && data.length>0) {
+    if (!value && data && data.length > 0) {
         data[0].photos.map((el) => photosData.push(el))
     } else {
-        data && data.map((el) =>{
+        data && data.map((el) => {
 
             if (value === el.title) {
                 el.photos.map((el) => photosData.push(el))
@@ -40,7 +40,7 @@ export const Gallery = () => {
         })
     }
     ;
-    
+
     const bigGallerySettings = {
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -48,7 +48,7 @@ export const Gallery = () => {
         dots: true,
         infinite: false,
         speed: 900,
-        slidesPerRow: 5,
+        slidesPerRow: 4,
         arrows: false,
         initialSlide: 0,
         touchMove: false,
@@ -138,8 +138,8 @@ export const Gallery = () => {
     }
 
     useEffect(() => {
-        if(data && data.length>0){
-        setValue(data[0].title);
+        if (data && data.length > 0) {
+            setValue(data[0].title);
         }
     }, [data]);
 
@@ -153,7 +153,7 @@ export const Gallery = () => {
 
     useEffect(() => {
         slider.current?.slickGoTo(0)
-    }, [data ])
+    }, [data])
 
 
     useEffect(() => {
@@ -162,8 +162,8 @@ export const Gallery = () => {
             window.removeEventListener("keydown", handleEsc);
         };
     }, []);
-    if (!data || data.length===0){
-        return(
+    if (!data || data.length === 0) {
+        return (
             <div className={styles.cap}>
                 Скоро здесь будут наши фотографии
             </div>
@@ -173,7 +173,7 @@ export const Gallery = () => {
         <>
             <HomeBlockTemplate title="">
                 <div className={styles["tabs-grid"]}>
-                    {data && data.length>0 &&
+                    {data && data.length > 0 &&
                         data.map((el) => {
                             return (
                                 <div
@@ -202,22 +202,30 @@ export const Gallery = () => {
                         <div>
                             <Carousel
                                 settings={
-                                    // photosData.length > 15
-                                    //   ?
-                                    bigGallerySettings
-                                    // : smallGallerySettings
+                                    photosData.length > 12
+                                        ?
+                                        bigGallerySettings
+                                        : smallGallerySettings
                                 }
                                 slider={slider}
                             >
-                                {photosData.map((src: string, index: number) => (
-                                    <div
-                                        key={index.toString()}
-                                        onClick={() => openImageViewer(index)}
-                                        className={styles.image}
-                                    >
-                                        <img src={src} alt=""/>
-                                    </div>
-                                ))}
+                                {photosData.map((src: string, index: number) => {
+                                    const img = new Image();
+                                    img.src = src;
+                                    return (
+                                        <div
+                                            key={index.toString()}
+                                            onClick={() => openImageViewer(index)}
+                                            className={styles.image}
+                                        >
+                                            <img src={src} alt="photo"
+                                                 className={
+                                                     (img.width - img.height) >= 0 ? styles.cover : styles.contain
+                                                 }
+                                            />
+                                        </div>
+                                    )
+                                })}
                             </Carousel>
                         </div>
                     ) : (

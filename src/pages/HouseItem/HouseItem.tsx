@@ -46,6 +46,16 @@ export const HouseItem = () => {
         <BeatLoader color="#583711" />
       </div>
     );
+
+  data.photos.map(el => {
+    const img = new Image();
+    img.src = el;
+
+    // console.log(img.style)
+
+    // @ts-ignore
+    (img.width - img.height) >=0 ? (img.style.objectFit = "cover") : (img.style.objectFit = "contain")
+  })
   
   return (
     <>

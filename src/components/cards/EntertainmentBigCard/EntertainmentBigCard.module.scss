@@ -42,6 +42,14 @@
     }
   }
 
+  .contain {
+    object-fit: contain;
+  }
+
+  .cover {
+    object-fit: cover;
+  }
+
   img {
     height: 215px;
     object-fit: contain;
