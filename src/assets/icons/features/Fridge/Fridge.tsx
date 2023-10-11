@@ -7,7 +7,10 @@ interface IProps {
 export const Fridge = (props: IProps) => {
   return (
     <ContainerForFeatures littleIcon={props.littleIcon}>
-      <svg
+      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.75 0H5.25C4.00912 0 3 1.12125 3 2.5V8.75H7.5V5H9.75V8.75H21V2.5C21 1.12125 19.9909 0 18.75 0ZM9.75 16.25H7.5V10H3V22.5C3 23.8787 4.00912 25 5.25 25H18.75C19.9909 25 21 23.8787 21 22.5V10H9.75V16.25Z" fill="#3F260A"/>
+      </svg>
+      {/* <svg
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -26,7 +29,7 @@ export const Fridge = (props: IProps) => {
           d="M8.26075 5.25464H7.49512V7.87787H8.26075V5.25464Z"
           fill="#583711"
         />
-      </svg>
+      </svg> */}
     </ContainerForFeatures>
   );
 };

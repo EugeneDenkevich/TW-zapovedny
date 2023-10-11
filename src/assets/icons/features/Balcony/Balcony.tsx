@@ -7,7 +7,39 @@ interface IProps {
 export const Balcony = (props: IProps) => {
   return (
     <ContainerForFeatures littleIcon={props.littleIcon}>
-      <svg
+      <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_1676_9595)">
+    <path d="M2.67822 12.1069V6.15872C2.67822 0.732178 3.67738 0.732178 9.97712 0.732178C16.2769 0.732178 17.276 0.732177 17.276 6.14956V11.9421" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9.97705 0.851074V12.1068" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M0.874682 10.7159C0.982239 10.7159 1.06943 10.6216 1.06943 10.5054C1.06943 10.3892 0.982239 10.2949 0.874682 10.2949C0.767124 10.2949 0.679932 10.3892 0.679932 10.5054C0.679932 10.6216 0.767124 10.7159 0.874682 10.7159Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M0.874612 10.5054C0.857678 12.7565 0.84921 15.0077 0.832275 17.2588L0.874612 10.5054Z" fill="#583711"/>
+    <path d="M0.874612 10.5054C0.857678 12.7565 0.84921 15.0077 0.832275 17.2588" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4.51555 10.414C4.62311 10.414 4.7103 10.3812 4.7103 10.3408C4.7103 10.3004 4.62311 10.2676 4.51555 10.2676C4.40799 10.2676 4.3208 10.3004 4.3208 10.3408C4.3208 10.3812 4.40799 10.414 4.51555 10.414Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M4.51573 10.3408C4.49879 11.0821 4.49032 11.8233 4.47339 12.5645L4.51573 10.3408Z" fill="#583711"/>
+    <path d="M4.51573 10.3408C4.49879 11.0821 4.49032 11.8233 4.47339 12.5645" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8.15666 10.414C8.26422 10.414 8.35141 10.3812 8.35141 10.3408C8.35141 10.3004 8.26422 10.2676 8.15666 10.2676C8.04911 10.2676 7.96191 10.3004 7.96191 10.3408C7.96191 10.3812 8.04911 10.414 8.15666 10.414Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M8.15659 10.3408C8.13966 11.0821 8.13119 11.8233 8.11426 12.5645L8.15659 10.3408Z" fill="#583711"/>
+    <path d="M8.15659 10.3408C8.13966 11.0821 8.13119 11.8233 8.11426 12.5645" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M11.8061 10.4047C11.9136 10.4047 12.0008 10.3719 12.0008 10.3315C12.0008 10.2911 11.9136 10.2583 11.8061 10.2583C11.6985 10.2583 11.6113 10.2911 11.6113 10.3315C11.6113 10.3719 11.6985 10.4047 11.8061 10.4047Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M11.806 10.3315C11.7891 11.0728 11.7806 11.814 11.7637 12.5552L11.806 10.3315Z" fill="#583711"/>
+    <path d="M11.806 10.3315C11.7891 11.0728 11.7806 11.814 11.7637 12.5552" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15.4472 10.423C15.5547 10.423 15.6419 10.3903 15.6419 10.3498C15.6419 10.3094 15.5547 10.2766 15.4472 10.2766C15.3396 10.2766 15.2524 10.3094 15.2524 10.3498C15.2524 10.3903 15.3396 10.423 15.4472 10.423Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M15.4471 10.3499C15.4302 11.0911 15.4217 11.8323 15.4048 12.5735L15.4471 10.3499Z" fill="#583711"/>
+    <path d="M15.4471 10.3499C15.4302 11.0911 15.4217 11.8323 15.4048 12.5735" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.1303 10.7068C19.2379 10.7068 19.325 10.6126 19.325 10.4964C19.325 10.3801 19.2379 10.2859 19.1303 10.2859C19.0227 10.2859 18.9355 10.3801 18.9355 10.4964C18.9355 10.6126 19.0227 10.7068 19.1303 10.7068Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeMiterlimit="10"/>
+    <path d="M19.13 10.4963C19.113 12.7475 19.1046 14.9986 19.0876 17.2498L19.13 10.4963Z" fill="#583711"/>
+    <path d="M19.13 10.4963C19.113 12.7475 19.1046 14.9986 19.0876 17.2498" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.0881 12.5735H0.874756" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.0881 17.2681H0.874756" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.1135 12.5735H0.874756V17.2588H19.1135V12.5735Z" fill="#583711" stroke="#583711" strokeWidth="1.46416" strokeLinecap="round" strokeLinejoin="round"/>
+    </g>
+    <defs>
+    <clipPath id="clip0_1676_9595">
+    <rect width="20" height="18" fill="white" transform="translate(0.00268555)"/>
+    </clipPath>
+    </defs>
+    </svg>
+      {/* <svg
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -146,7 +178,7 @@ export const Balcony = (props: IProps) => {
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
     </ContainerForFeatures>
   );
 };
