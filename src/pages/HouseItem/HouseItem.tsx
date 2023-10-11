@@ -3,6 +3,7 @@ import { BeatLoader } from "react-spinners";
 
 import { BigBed } from "../../assets/icons/features/BigBed";
 import { Person } from "../../assets/icons/features/Person";
+import { SingleBed } from "../../assets/icons/features/SingleBed";
 import { ToFormButton } from "../../components/buttons/toFormButton";
 import { LittleKitchenCard } from "../../components/cards/LittleKitchenCard";
 import { FaceBlock } from "../../components/FaceBlock/FaceBlock";
@@ -111,7 +112,7 @@ export const HouseItem = () => {
                   <h2>Удобства в домике</h2>
                   <div className={styles.line}></div>
                   <div className={styles.grid}>
-                    {data.bed_count && data.bed_count > 0 ? (
+                    {data.beds_types && data.beds_types.length > 0 ? (
                       <div className={styles["grid-item"]}>
                         <BigBed littleIcon={true} /> {data.bed_count}{" "}
                         {data.bed_count === 1 ? "кровать" : "кровати(ей)"}

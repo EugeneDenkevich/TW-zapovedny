@@ -1,27 +1,29 @@
-import styles from "./Form.module.scss";
-import {useForm, FormProvider, Controller, DefaultValues} from "react-hook-form";
-import {useState, useRef, useEffect, ChangeEvent} from "react";
-import {gender, country, countNumber, FormValues, Purchases} from "../../../types";
-import {MainButton} from "../../buttons/mainButton/MainButton";
-import {SelectComponent} from "../SelectComponent";
+import {ChangeEvent,useEffect, useRef, useState} from "react";
+import {Controller, DefaultValues,FormProvider, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {getErrorText} from "../../../services/errorText";
-import {AppState} from "../../../reduxTools/store";
-import {closeFormStateAction} from "../../../reduxTools/formForOrderHouse/actions";
-import {useGetObjectsQuery, useCreatePurchaseMutation} from "../../../reduxTools/requests/apiRequests";
-import Modal from "./../../Modal";
-import {HouseIcon} from "../../../assets/icons/inputIcons/HouseIcon";
-import {FormInput} from "../FormInput";
-import {Calendar} from "../Calendar";
-import {Phone} from "../../../assets/icons/inputIcons/Phone";
+
+import {Adress} from "../../../assets/icons/inputIcons/Adress";
 import {Email} from "../../../assets/icons/inputIcons/Email";
-import {Telegram} from "../../../assets/icons/inputIcons/Telegram";
-import {Persons} from "../../../assets/icons/inputIcons/Persons";
+import {HouseIcon} from "../../../assets/icons/inputIcons/HouseIcon";
 import {Name} from "../../../assets/icons/inputIcons/Name";
 import {Passport} from "../../../assets/icons/inputIcons/Passport";
-import {Adress} from "../../../assets/icons/inputIcons/Adress";
+import {Persons} from "../../../assets/icons/inputIcons/Persons";
 import {Pets} from "../../../assets/icons/inputIcons/Pets";
+import {Phone} from "../../../assets/icons/inputIcons/Phone";
+import {Telegram} from "../../../assets/icons/inputIcons/Telegram";
+import {closeFormStateAction} from "../../../reduxTools/formForOrderHouse/actions";
+import {useCreatePurchaseMutation,useGetObjectsQuery} from "../../../reduxTools/requests/apiRequests";
+import {getErrorText} from "../../../services/errorText";
+import {countNumber, country, FormValues, gender, Purchases} from "../../../types";
+import {MainButton} from "../../buttons/mainButton/MainButton";
+import {Calendar} from "../Calendar";
+import {FormInput} from "../FormInput";
+import {SelectComponent} from "../SelectComponent";
+
+import Modal from "./../../Modal";
 import {PolicyAgreement} from './../../PolicyAgreement/PolicyAgreement';
+
+import styles from "./Form.module.scss";
 
 const defaultValues: DefaultValues<FormValues> = {
     address: "",
@@ -57,8 +59,7 @@ export const Form = () => {
         handleSubmit,
         control,
         reset,
-        setValue,
-        formState: {errors, isSubmitSuccessful},
+        formState: {errors},
         register
     } = methods;
     const {data: houses} = useGetObjectsQuery();
@@ -80,6 +81,7 @@ export const Form = () => {
     useEffect(resizeTextArea);
 
     const onSubmit = (data: FormValues) => {
+        
         const purchase: Purchases = {
             object: data.object.value,
             fio: data.fio,
@@ -94,12 +96,11 @@ export const Form = () => {
             count_adult: data.count_adult.value,
             count_kids: data.count_kids.value,
             pets: data.pets,
-            comment: data.comment
+            comment: textareaValue
         }
         createPurchase(purchase)
             .unwrap()
             .then((response) => {
-                console.log(response);
                 setOpenModal(true);
                 setMyClass("success wrapper")
                 setModalContent("Заявка отправлена. В ближайшее время мы свяжемся с Вами для уточнения деталей " +
@@ -133,7 +134,7 @@ export const Form = () => {
     if (houses === undefined) {
         return null;
     }
-
+    
     return (
         <>
             <FormProvider {...methods} >
@@ -281,7 +282,7 @@ export const Form = () => {
                                 />
                             )}
                             name="comment"
-                            control={methods.control}
+                            control={control}
                         />
                     </div>
                     <MainButton

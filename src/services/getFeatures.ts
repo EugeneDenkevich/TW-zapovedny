@@ -10,7 +10,6 @@ import { Iron } from "../assets/icons/features/Iron/Iron";
 import { KitchenIcon } from "../assets/icons/features/KitchenIcon";
 import { Mangal } from "../assets/icons/features/Mangal";
 import { Microwave } from "../assets/icons/features/Microwave";
-import { NoSmoking } from "../assets/icons/features/NoSmoking";
 import { Parking } from "../assets/icons/features/Parking";
 import { Patio } from "../assets/icons/features/Patio";
 import { PersonalPier } from "../assets/icons/features/PersonalPier";
