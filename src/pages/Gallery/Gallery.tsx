@@ -11,6 +11,7 @@ import {useGetGalleryQuery} from "../../reduxTools/requests/apiRequests";
 import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
 
 import styles from "./Gallery.module.scss";
+import {DimensionsFunc} from "../Home/Home";
 
 export const Gallery = () => {
     const {data} = useGetGalleryQuery();
@@ -169,6 +170,9 @@ export const Gallery = () => {
             </div>
         )
     }
+
+    // const [dimensions, setDimensions] = useState({width: 0, height: 0});
+
     return (
         <>
             <HomeBlockTemplate title="">
@@ -210,8 +214,11 @@ export const Gallery = () => {
                                 slider={slider}
                             >
                                 {photosData.map((src: string, index: number) => {
+                                    // console.log("hello")
                                     const img = new Image();
                                     img.src = src;
+                                    // console.log(img)
+                                    // (img.width - img.height) >=0 ? (img.style.objectFit = "cover") : (img.style.objectFit = "contain")
                                     return (
                                         <div
                                             key={index.toString()}
