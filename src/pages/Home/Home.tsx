@@ -34,6 +34,18 @@ export const DimensionsFunc = (src: string, setDimensions: (value: {width: numbe
   }
 };
 
+export const getImgSize = (imgSrc: string) => {
+  let newImg = new Image();
+
+  newImg.src = imgSrc;
+
+  let height = newImg.height;
+  let width = newImg.width;
+
+  return (width - height)
+};
+
+
 export const Home = () => {
   // const [imageIndex, setImageIndex] = useState<number>(0);
   const {data: houses} = useGetObjectsQuery();
@@ -128,7 +140,6 @@ export const Home = () => {
           arrows: false,
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
           rows: 2,
           slidesPerRow: 2,
         }

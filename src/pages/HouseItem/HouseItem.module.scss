@@ -129,9 +129,7 @@ $triangles-height: calc($height / 2);
           height: 194px;
         }
         img {
-          max-width: 100%;
-          //object-fit: contain;
-          //object-position: center;
+          max-width: 101%;
           height: 100%;
         }
       }
@@ -165,13 +163,19 @@ $triangles-height: calc($height / 2);
           height: 100%;
 
           img {
-            object-fit: contain;
-            //object-position: center;
             width: 100%;
             height: 100%;
           }
         }
       }
+    }
+
+    & :global(.image-gallery-thumbnail.active) {
+      border: 3px solid $primaryColor;
+    }
+
+    & :global(.image-gallery-thumbnail:hover) {
+      border: 3px solid $primaryColor;
     }
 
     & :global(.image-gallery-thumbnail + .image-gallery-thumbnail) {

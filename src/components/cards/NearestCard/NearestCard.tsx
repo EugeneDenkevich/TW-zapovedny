@@ -5,7 +5,7 @@ import Carousel from "../../Carousel";
 
 import styles from "./NearestCard.module.scss";
 import {useEffect, useState} from "react";
-import {DimensionsFunc} from "../../../pages/Home/Home";
+import {DimensionsFunc, getImgSize} from "../../../pages/Home/Home";
 
 interface IProps {
   element: INearest;
@@ -50,14 +50,13 @@ const NearestCard = (props: IProps) => {
           <Carousel settings={nearestPhotosSettings}>
             {photos.map((el, index) => {
 
-              const img = new Image();
-              img.src = el;
+              let dif = getImgSize(el)
 
               return (
                 <div key={index}>
                   <img src={el} alt="nearPlease"
                        className={
-                         (img.width - img.height) >= 0 ? styles.cover : styles.contain
+                         dif > 0 ? styles.cover : styles.contain
                        }
                   />
                 </div>

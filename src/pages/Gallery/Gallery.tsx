@@ -11,7 +11,7 @@ import {useGetGalleryQuery} from "../../reduxTools/requests/apiRequests";
 import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
 
 import styles from "./Gallery.module.scss";
-import {DimensionsFunc} from "../Home/Home";
+import {getImgSize} from "../Home/Home";
 
 export const Gallery = () => {
     const {data} = useGetGalleryQuery();
@@ -39,8 +39,7 @@ export const Gallery = () => {
                 el.photos.map((el) => photosData.push(el))
             }
         })
-    }
-    ;
+    };
 
     const bigGallerySettings = {
         slidesToShow: 3,
@@ -66,7 +65,6 @@ export const Gallery = () => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    infinite: true,
                     dots: true,
                     rows: 1,
                     slidesPerRow: 3,
@@ -78,10 +76,52 @@ export const Gallery = () => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    infinite: true,
                     dots: true,
                     touchMove: true,
-                    // rows: 4,
+                    slidesPerRow: 4,
+                    initialSlide: 0,
+                }
+            }
+        ]
+    };
+
+    const middleGallerySettings = {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        rows: 1,
+        dots: true,
+        infinite: false,
+        speed: 900,
+        slidesPerRow: 3,
+        arrows: false,
+        initialSlide: 0,
+        touchMove: false,
+        dotsClass: 'custom_paging',
+        customPaging: (i: number) => (
+            <div>{i + 1}</div>
+        ),
+        appendDots: (dots: any) => <div className={styles.custom_padding}>
+            <ul>{dots}</ul>
+        </div>,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    dots: true,
+                    rows: 1,
+                    slidesPerRow: 3,
+                    initialSlide: 0,
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    touchMove: true,
                     slidesPerRow: 4,
                     initialSlide: 0,
                 }
@@ -114,7 +154,6 @@ export const Gallery = () => {
                     arrows: false,
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    infinite: true,
                     dots: true,
                     rows: 1,
                     slidesPerRow: 2,
@@ -127,8 +166,6 @@ export const Gallery = () => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    infinite: true,
-                    dots: true,
                     rows: 4,
                     slidesPerRow: 1,
                     touchMove: false,
@@ -169,9 +206,7 @@ export const Gallery = () => {
                 Скоро здесь будут наши фотографии
             </div>
         )
-    }
-
-    // const [dimensions, setDimensions] = useState({width: 0, height: 0});
+    };
 
     return (
         <>
@@ -206,19 +241,20 @@ export const Gallery = () => {
                         <div>
                             <Carousel
                                 settings={
-                                    photosData.length > 12
+                                    photosData.length >= 12
                                         ?
                                         bigGallerySettings
-                                        : smallGallerySettings
+                                        : photosData.length >= 9 ?
+                                        middleGallerySettings : smallGallerySettings
                                 }
                                 slider={slider}
                             >
                                 {photosData.map((src: string, index: number) => {
-                                    // console.log("hello")
-                                    const img = new Image();
-                                    img.src = src;
-                                    // console.log(img)
-                                    // (img.width - img.height) >=0 ? (img.style.objectFit = "cover") : (img.style.objectFit = "contain")
+
+                                    let dif = getImgSize(src);
+
+                                    console.log(dif)
+
                                     return (
                                         <div
                                             key={index.toString()}
@@ -227,7 +263,7 @@ export const Gallery = () => {
                                         >
                                             <img src={src} alt="photo"
                                                  className={
-                                                     (img.width - img.height) >= 0 ? styles.cover : styles.contain
+                                                     dif > 0 ? styles.cover : styles.contain
                                                  }
                                             />
                                         </div>

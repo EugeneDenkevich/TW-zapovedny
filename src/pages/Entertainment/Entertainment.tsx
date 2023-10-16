@@ -69,8 +69,47 @@ const Entertainment = () => {
         ]
     };
 
+    const smallEntertainmentCardsSettings = {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        speed: 900,
+        rows: 1,
+        dots: true,
+        dotsClass: 'custom_paging',
+        customPaging: (i: number) => (
+            <div>{i + 1}</div>
+        ),
+        appendDots: (dots: any) => <div className={styles.custom_padding}><ul>{dots}</ul></div>,
+        infinite: true,
+        slidesPerRow: 1,
+        arrows: false,
+        touchMove: false,
+        responsive: [
+            {
+                breakpoint: 950,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    rows: 1,
+                    slidesPerRow: 1,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    rows: 3,
+                    arrows: false,
+                    slidesPerRow: 1,
+                }
+            }
+        ]
+    };
+
     let slider = useRef<Slider | null>(null);
-    console.log(data)
+
   return (
     <>
       <FaceBlock title={titleEntertainment} image={entertainments_back} />
@@ -78,7 +117,9 @@ const Entertainment = () => {
         <div className={styles.container}>
           {data ? (
             <div>
-              <Carousel settings={entertainmentCardsSettings} slider={slider}>
+              <Carousel settings={
+                  data.length >= 6 ? entertainmentCardsSettings
+                  : smallEntertainmentCardsSettings} slider={slider}>
                 {data.map((element) => (
                   <EntertainmentBigCard
                     key={element.id}

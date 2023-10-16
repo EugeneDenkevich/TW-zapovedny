@@ -10,6 +10,7 @@ import Carousel from "../../Carousel";
 import Price from "../../Price";
 
 import styles from "./HouseBigCard.module.scss";
+import {useEffect, useState} from "react";
 
 interface MyProps extends House {
     currency: string,
@@ -65,6 +66,17 @@ const HouseBigCard = (props: MyProps) => {
             : (Math.round((+price_holiday / cur_scale) * cur_rate) / 10) * 10
         : priceBYN_weekday;
 
+    function getImgSize(imgSrc: string) {
+        let newImg = new Image();
+
+        newImg.src = imgSrc;
+
+        let height = newImg.height;
+        let width = newImg.width;
+
+        return (width - height)
+    };
+
     return (
         <div className={styles.card}>
             <div className={styles["card-left"]}>
@@ -73,22 +85,13 @@ const HouseBigCard = (props: MyProps) => {
 
                     {photos.map((el) => {
 
-                        const dimensions = {
-                            width: 0,
-                            height: 0
-                        }
-
-                        const img = new Image();
-                        img.src = el;
-
-                        dimensions.width = img.width;
-                        dimensions.height = img.height
+                        let dif = getImgSize(el)
 
                         return (
                             <div key={el}>
                                 <img src={el} alt="house"
                                      className={
-                                         (dimensions.width - dimensions.height) >= 0 ? styles.cover : styles.contain
+                                         dif > 0 ? styles.cover : styles.contain
                                      }
                                 />
                             </div>

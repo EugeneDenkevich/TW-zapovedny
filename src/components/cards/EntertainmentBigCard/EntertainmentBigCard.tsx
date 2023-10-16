@@ -6,7 +6,7 @@ import Carousel from "../../Carousel";
 
 import styles from "./EntertainmentBigCard.module.scss";
 import {useEffect, useState} from "react";
-import {DimensionsFunc} from "../../../pages/Home/Home";
+import {DimensionsFunc, getImgSize} from "../../../pages/Home/Home";
 
 interface  MyProps extends IEntertainments {
   currency: string,
@@ -56,11 +56,6 @@ export const EntertainmentBigCard = (props: MyProps) => {
     ? `от ${priceBYN} ${+priceBYN > 1 ? "рублей" : "рубля"}`
     : "бесплатно";
 
-    const [dimensions, setDimensions] = useState({width: 0, height: 0});
-
-    useEffect(() => {
-        photos && DimensionsFunc(photos[0], setDimensions)
-    });
 
   return (
     <div className={styles.card}>
@@ -74,15 +69,19 @@ export const EntertainmentBigCard = (props: MyProps) => {
       </div>
       {photos ? (
         <Carousel settings={entertainmentPhotosSettings}>
-          {photos.map((el, index) => (
-            <div key={index}>
+          {photos.map((el, index) => {
+
+              let dif = getImgSize(el)
+
+            return (
+                <div key={index}>
               <img src={el} alt={title}
                    className={
-                       (dimensions.width - dimensions.height) >= 0 ? styles.cover : styles.contain
+                       dif > 0 ? styles.cover : styles.contain
                    }
               />
             </div>
-          ))}
+            )})}
         </Carousel>
       ) : (
         <div className={styles.preload}>
