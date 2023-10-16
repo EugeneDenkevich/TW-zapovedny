@@ -20,6 +20,7 @@ import { IMeal } from "../../types";
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
 import styles from "./Kitchen.module.scss";
+import {log} from "util";
 
 export const Kitchen = () => {
   const { data: meal } = useGetFeedingInfoQuery();
@@ -58,9 +59,41 @@ export const Kitchen = () => {
         ]
     };
 
+    const smallKitchenCardsSettings = {
+        arrows: false,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        touchMove: false,
+        speed: 900,
+        row: 1,
+        dots: true,
+        dotsClass: 'custom_paging',
+        customPaging: (i: number) => (
+            <div>{i + 1}</div>
+        ),
+        appendDots: (dots: any) => <div className={styles.custom_padding}><ul>{dots}</ul></div>,
+        infinite: true,
+        slidesPerRow: 2,
+        responsive: [
+            {
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    touchMove: true,
+                    infinite: true,
+                    row: 1,
+                    slidesPerRow: 4,
+                }
+            }
+        ]
+    };
+
+
     let slider = useRef<Slider | null>(null);
 
     const windowWidth = window.innerWidth;
+
 
   return (
     <>
@@ -104,7 +137,11 @@ export const Kitchen = () => {
             <div className={styles["meal-slider"]}>
               {dishes ? (
                 <div>
-                  <Carousel settings={kitchenCardsSettings} slider={slider}>
+                  <Carousel settings={
+                      dishes.length >= 8 ?
+                      kitchenCardsSettings :
+                          smallKitchenCardsSettings
+                  } slider={slider}>
                     {dishes.map((el) => (
                       <KitchenCard
                         key={el.id}

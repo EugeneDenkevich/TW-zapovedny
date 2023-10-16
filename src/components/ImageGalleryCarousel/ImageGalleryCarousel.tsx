@@ -10,16 +10,26 @@ interface IProps {
 }
 
 export const MyGallery = (props: IProps) => {
-  const images: ImagesGallery[] = props.images.map((el) => {
-    const img = new Image();
-    img.src = el;
 
-    // @ts-ignore
-    (img.width - img.height) >=0 ? (img.style.objectFit = "cover") : (img.style.objectFit = "contain")
+  function getImgSize(imgSrc: string) {
+    let newImg = new Image();
+
+    newImg.src = imgSrc;
+
+    let height = newImg.height;
+    let width = newImg.width;
+
+    return (width - height)
+  };
+
+  const images: ImagesGallery[] = props.images.map((el) => {
+    let dif = getImgSize(el);
 
     return {
       original: el,
       thumbnail: el,
+      originalClass: dif >= 0 ? "coverOrigin" : "containOrigin",
+      thumbnailClass: dif >= 0 ? "coverThumbnail" : "containThumbnail",
     };
   });
   return (
