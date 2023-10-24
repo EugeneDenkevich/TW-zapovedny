@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { openFormStateAction } from "../../../reduxTools/formForOrderHouse/actions";
+import { useDatas } from "../../../services/useDatas";
 import { ClassName } from "../../../types";
 import { MainButton } from "../mainButton/MainButton";
 
@@ -13,8 +14,10 @@ interface IProps extends ClassName {
 }
 
 export const ToFormButton = (props: IProps) => {
+  const datas = useDatas();
+  const {nameForSearchButton} = datas;
   const {
-    buttonValue = "Найти домик",
+    buttonValue = nameForSearchButton,
     value = "Заповедный остров",
     className    
   } = props;

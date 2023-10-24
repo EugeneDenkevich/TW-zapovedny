@@ -7,18 +7,18 @@ import {ArrowPrev} from "../../assets/icons/ArrowPrev";
 import Carousel from "../../components/Carousel";
 import {HomeBlockTemplate} from "../../components/HomeBlockTemplate";
 import {useGetGalleryQuery} from "../../reduxTools/requests/apiRequests";
+import {getImgSize} from "../Home/Home";
 
 import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
 
 import styles from "./Gallery.module.scss";
-import {getImgSize} from "../Home/Home";
 
 export const Gallery = () => {
     const {data} = useGetGalleryQuery();
     const [value, setValue] = useState<string | undefined>("");
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-
+    
     const openImageViewer = useCallback((index: number) => {
         setCurrentImage(index);
         setIsViewerOpen(true);

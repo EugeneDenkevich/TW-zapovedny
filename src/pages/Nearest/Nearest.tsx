@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useRef} from "react";
+import React from "react";
 import Slider from "react-slick";
 import {BeatLoader} from "react-spinners";
 
@@ -6,6 +6,7 @@ import {NearestCard} from "../../components/cards/NearestCard";
 import Carousel from "../../components/Carousel";
 import {HomeBlockTemplate} from "../../components/HomeBlockTemplate";
 import {useGetNearestsQuery} from "../../reduxTools/requests/apiRequests";
+import { useDatas } from "../../services/useDatas";
 
 import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
 
@@ -13,7 +14,8 @@ import styles from "./Nearest.module.scss";
 
 const Nearest = () => {
     const {data} = useGetNearestsQuery();
-
+    const datas = useDatas();
+    const {nameForSearchButton} = datas;
     const nearestCardsSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -83,7 +85,7 @@ const Nearest = () => {
                 </div>
             </HomeBlockTemplate>{" "}
             <HomeBlockTemplate>
-                <ToFormButton value="Заповедный остров" buttonValue="Найти домик"/>
+                <ToFormButton value="Заповедный остров" buttonValue={nameForSearchButton}/>
             </HomeBlockTemplate>
         </>
     );
