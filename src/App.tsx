@@ -5,7 +5,6 @@ import { Layout } from "./components/Layout/Layout";
 import { Contacts } from "./pages/Contacts";
 import Entertainment from "./pages/Entertainment/Entertainment";
 import EntertainmentCurrent from "./pages/EntertainmentCurrent/EntertainmentCurrent";
-import { Gallery } from "./pages/Gallery";
 import { Home } from "./pages/Home/Home";
 import { HouseItem } from "./pages/HouseItem";
 import { Houses } from "./pages/Houses";
@@ -13,6 +12,7 @@ import { Kitchen } from "./pages/Kitchen";
 import { Nearest } from "./pages/Nearest";
 import { NotFound } from "./pages/NotFound";
 import { Rules } from "./pages/Rules";
+import {NewGallery} from "./pages/NewGallery/NewGallery";
 
 function App() {
   return (
@@ -37,8 +37,8 @@ function App() {
             path="entertainments/:id/form"
             element={<EntertainmentCurrent />}
           />
-          <Route path="galleries" element={<Gallery />} />
-          <Route path="galleries/form" element={<Gallery />} />
+          <Route path="galleries" element={<NewGallery />} />
+          <Route path="galleries/form" element={<NewGallery />} />
           <Route path="nearests" element={<Nearest />} />
           <Route path="nearests/form" element={<Nearest />} />
         </Route>

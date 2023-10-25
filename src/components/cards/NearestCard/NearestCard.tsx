@@ -4,8 +4,7 @@ import { INearest } from "../../../types";
 import Carousel from "../../Carousel";
 
 import styles from "./NearestCard.module.scss";
-import {useEffect, useState} from "react";
-import {DimensionsFunc, getImgSize} from "../../../pages/Home/Home";
+import {getImgSize} from "../../../pages/Home/Home";
 
 interface IProps {
   element: INearest;
