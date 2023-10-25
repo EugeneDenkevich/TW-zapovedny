@@ -109,7 +109,7 @@ export const HouseItem = () => {
                         <div className={styles["grid-item"]} key={elem.id}>
                         {getBedsIcon(elem.id, true)} {elem.count}
                         {getBedsTitle(elem.id,+elem.count )}
-                        {/* {data.bed_count === 1 ? "кровать" : "кровати(ей)"} */}
+                       
                       </div>
                         )
                       })
