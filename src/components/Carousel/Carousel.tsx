@@ -11,9 +11,6 @@ interface IProps {
 }
 
 export const Carousel = (props: IProps) => {
-  // let slider = useRef<Slider | null>(null);
-
-  // slider.current && slider.current.slickGoTo(0)
 
   return (
     <Slider {...props.settings} ref={props.slider}>
