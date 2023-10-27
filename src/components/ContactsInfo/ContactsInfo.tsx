@@ -30,6 +30,9 @@ export const ContactsInfo = (props: IProps) => {
         return <p key={index}>{item}</p>;
       })
     : null;
+  const insta = data?data[0].social.find(item=> item.Instagram):undefined 
+  const book = data?data[0].social.find(item=> item.Facebook):undefined 
+  
   return (
     <div
       className={
@@ -60,14 +63,14 @@ export const ContactsInfo = (props: IProps) => {
         <div className={styles.phones}>{phones}</div>
         <div className={styles.socials}>
           <a
-            href={data && data[0].social[0].Facebook}
+            href={book && book.Facebook}
             target="_blank"
             rel="noreferrer"
           >
             <Facebook />
           </a>
           <a
-            href={data && data[0].social[0].Instagram}
+            href={insta && insta.Instagram}
             target="_blank"
             rel="noreferrer"
           >
