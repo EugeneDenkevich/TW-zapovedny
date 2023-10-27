@@ -244,7 +244,7 @@
 
     & :global(.slick-list) {
       margin: 0 -15px;
-      overflow: hidden;
+      overflow: visible;
       overflow-x: clip;
       padding-bottom: 3px;
 

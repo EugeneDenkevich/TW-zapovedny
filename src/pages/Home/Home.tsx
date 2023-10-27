@@ -20,6 +20,7 @@ import { useRate } from "../../services/useRate";
 import {ToFormButton} from './../../components/buttons/toFormButton';
 
 import styles from "./Home.module.scss";
+import {useDispatch} from "react-redux";
 
 export const DimensionsFunc = (src: string, setDimensions: (value: {width: number, height: number}) => void) => {
   const img = new Image();
@@ -36,18 +37,14 @@ export const DimensionsFunc = (src: string, setDimensions: (value: {width: numbe
 
 export const getImgSize = (imgSrc: string) => {
   let newImg = new Image();
-
   newImg.src = imgSrc;
-
   let height = newImg.height;
   let width = newImg.width;
-
   return (width - height)
 };
 
-
 export const Home = () => {
-  // const [imageIndex, setImageIndex] = useState<number>(0);
+  const dispatch = useDispatch();
   const {data: houses} = useGetObjectsQuery();
   const {data: dishes} = useGetDishesQuery();
   const {data: entertainments} = useGetEntertainmentsQuery();
@@ -56,7 +53,7 @@ export const Home = () => {
   const datas = useDatas();
   const {currency, cur_rate, cur_scale} = useRate();
   const {title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton} = datas;
-  
+
   const sliderFaceBlockSettings: Settings = {
     slidesToShow: 1,
     centerPadding: "137px",
