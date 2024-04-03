@@ -172,7 +172,7 @@ export const Home = () => {
         <HomeBlockTemplate title={titleHouse} className={styles.houses}>
           <div className={styles.blockDescription}>{mainPage && mainPage[0].house_description}</div>
           <div className={styles["houses-carousel"]}>
-            {houses ? (
+            {houses&&houses.length>0 ? (
                 <Carousel settings={housesSliderSettings}>
                   {houses.map((el) => (
                       <HouseLittleCard
@@ -183,7 +183,9 @@ export const Home = () => {
                           {...el}
                       />
                   ))}
-                </Carousel>) : (
+                </Carousel>) : houses&&houses.length===0?(           
+            <div></div>             
+           ):(
                 <div className={styles.preload}>
                   <BeatLoader color="#583711"/>
                 </div>)
