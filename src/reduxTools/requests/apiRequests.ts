@@ -15,8 +15,8 @@ import {
   Purchases,
 } from "../../types";
 
-// const URL = `https://api-doc.zapovednostrov.by/api/`;
-const URL = `https://api-bot-redis.travelweb.dev/api/`;
+const URL = `https://api-doc.zapovednostrov.by/api/`;
+// const URL = `https://api-bot-redis.travelweb.dev/api/`;
 
 export const api = createApi({
   reducerPath: "api",

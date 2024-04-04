@@ -20,6 +20,7 @@ import { createPages } from "../../utils/pagesCreator";
 import Carousel from "../../components/Carousel";
 import Slider, { Settings } from "react-slick";
 import { newGetImgSize3 } from "../../utils/imgSize";
+import { ItemState } from "../../reduxTools/gallery/galleryReducer";
 
 export const NewGallery = () => {
     const dispatch = useDispatch();
@@ -34,7 +35,9 @@ export const NewGallery = () => {
 
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(perPage);
-    const [totalCount, setTotalCount] = useState(data && data[0].photos.length);
+    // const [totalCount, setTotalCount] = useState(data && data[0].photos.length);
+
+    const [totalCount, setTotalCount] = useState(data && data[0] && data[0].photos && data[0].photos.length);
 
     const gallerySliderSettings: Settings = {
         slidesToShow: 1,
@@ -53,14 +56,16 @@ export const NewGallery = () => {
         if (data && data.length > 0) {
             setValue(data[0].title);
         };
-        data && setTotalCount(data[0].photos.length);
+
+        data && data.length && data[0].photos && setTotalCount(data[0].photos.length);
+
         dispatch(setCurrentPage(1))
 
     }, [data]);
 
-    // useLayoutEffect(() => {
-    //     data && newGetImgSize3(data[0].photos, dispatch);
-    // }, [data])
+    useLayoutEffect(() => {
+        data && newGetImgSize3(data[0].photos, dispatch);
+    }, [data])
 
     useEffect(() => {
         const windowWidth = window.innerWidth;
