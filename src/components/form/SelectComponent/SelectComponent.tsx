@@ -1,5 +1,5 @@
 import React from "react";
-import { Controller,useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import ReactSelect from "react-select";
 
 import "./SelectComponent.scss";
@@ -23,8 +23,8 @@ export const SelectComponent = (props: IProps) => {
   const { optionBase, icon, name, required, isSearchable, label, error } =
     props;
 
-  const {control } = useFormContext();
- 
+  const { control } = useFormContext();
+
   const options = optionBase.map((item: any) => ({
     value: item.id || item.title,
     label: item.title,
@@ -49,7 +49,7 @@ export const SelectComponent = (props: IProps) => {
             <ReactSelect
               {...field}
               options={options}
-              placeholder={options[0].label}
+              placeholder={options.length ? options[0].label : ""}
               className="customSelect"
               classNamePrefix="customSelect"
               isSearchable={isSearchable}
