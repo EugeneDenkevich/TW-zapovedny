@@ -78,6 +78,77 @@ export const Home = () => {
     ]
   };
 
+  const housesSliderSettings1 = {
+    arrows: true,
+    dots: true,
+    speed: 900,
+    slidesToShow: 1,
+    centerPadding: "0px",
+    slidesToScroll: 1,
+    initialSlide: 0,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1270,
+        settings: {
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+          slidesPerRow: 1,
+          dots: true,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        }
+      },
+    ]
+  };
+
+  const housesSliderSettings2 = {
+    arrows: true,
+    dots: true,
+    speed: 900,
+    slidesToShow: 2,
+    centerPadding: "0px",
+    slidesToScroll: 1,
+    initialSlide: 0,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 1270,
+        settings: {
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          arrows: false,
+          slidesToShow: 2,
+          dots: true,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          arrows: false,
+          slidesToShow: 1,
+        }
+      },
+    ]
+  };
+
+
+
   const housesSliderSettings = {
     arrows: true,
     dots: true,
@@ -157,7 +228,7 @@ export const Home = () => {
             </div>
             <div className={styles["right-side"]}>
               <Carousel settings={sliderFaceBlockSettings}>
-                {mainPage && mainPage[0].photos.map((el, index) => {
+                {mainPage && mainPage[0].photos.map((el: any, index: number) => {
                   return <img key={index.toString()} src={el} alt="pict" />;
                 })}
               </Carousel>
@@ -174,16 +245,18 @@ export const Home = () => {
         <div className={styles.blockDescription}>{mainPage && mainPage[0].house_description}</div>
         <div className={styles["houses-carousel"]}>
           {houses && houses.length > 0 ? (
-            <Carousel settings={housesSliderSettings}>
-              {houses.map((el) => (
-                <HouseLittleCard
-                  key={el.id}
-                  currency={currency}
-                  cur_scale={cur_scale}
-                  cur_rate={cur_rate}
-                  {...el}
-                />
-              ))}
+            <Carousel settings={houses.length === 1 ? housesSliderSettings1 : houses.length === 2 ? housesSliderSettings2 : housesSliderSettings}>
+              {
+                houses.map((el: any) => (
+                  <HouseLittleCard
+                    key={el.id}
+                    currency={currency}
+                    cur_scale={cur_scale}
+                    cur_rate={cur_rate}
+                    {...el}
+                  />
+                ))
+              }
             </Carousel>) : houses && houses.length === 0 ? (
               <div></div>
             ) : (
@@ -193,14 +266,14 @@ export const Home = () => {
           }
         </div>
         <MainButton value="Подробнее" handler={() => navigate("/houses")} />
-      </HomeBlockTemplate>
+      </HomeBlockTemplate >
 
       <HomeBlockTemplate title={titleKitchen} className={styles.kitchen}>
         <div className={styles.blockDescription}>{mainPage && mainPage[0].kitchen_description}</div>
         <div className={styles["carousel-container"]}>
           {dishes ? (
             <Carousel settings={kitchenSliderSettings}>
-              {dishes.map((el) => (
+              {dishes.map((el: any) => (
                 <KitchenCard
                   key={el.id}
                   id={el.id}
@@ -220,7 +293,7 @@ export const Home = () => {
       <HomeBlockTemplate title={titleEntertainment}>
         <div className={styles.blockDescription}> {mainPage && mainPage[0].entertainment_description} </div>
         <div className={styles["entertainment-container"]}>
-          {entertainments ? entertainments.slice(0, 6).map((el, index) => {
+          {entertainments ? entertainments.slice(0, 6).map((el: any, index: number) => {
             return (
               <EntertainmentCard
                 title={el.title}

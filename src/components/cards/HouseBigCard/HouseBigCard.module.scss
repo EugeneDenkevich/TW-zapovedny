@@ -82,6 +82,7 @@
         overflow: visible !important;
         overflow-x: clip !important;
         height: auto;
+        margin: 0 -10px;
 
         .contain {
           object-fit: contain;
@@ -106,7 +107,11 @@
           }
         }
       }
+      & :global(.slick-slide) {
+        width: 100%;
+        padding: 0 10px;
     }
+  }
 
     @extend %arrowsBlack;
     @extend %dots;

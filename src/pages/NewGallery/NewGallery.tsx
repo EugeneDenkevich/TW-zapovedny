@@ -20,7 +20,6 @@ import { createPages } from "../../utils/pagesCreator";
 import Carousel from "../../components/Carousel";
 import Slider, { Settings } from "react-slick";
 import { newGetImgSize3 } from "../../utils/imgSize";
-import { ItemState } from "../../reduxTools/gallery/galleryReducer";
 
 export const NewGallery = () => {
     const dispatch = useDispatch();
@@ -53,13 +52,15 @@ export const NewGallery = () => {
         dispatch(setEmptyArrayItems([]));
         if (data && data.length > 0) {
             setValue(data[0].title);
-        }
-        ;
-        data && newGetImgSize3(data[0].photos, dispatch);
+        };
         data && setTotalCount(data[0].photos.length);
         dispatch(setCurrentPage(1))
 
     }, [data]);
+
+    // useLayoutEffect(() => {
+    //     data && newGetImgSize3(data[0].photos, dispatch);
+    // }, [data])
 
     useEffect(() => {
         const windowWidth = window.innerWidth;
@@ -95,12 +96,12 @@ export const NewGallery = () => {
     let photosData: string[] = [];
 
     if (!value && data && data.length > 0) {
-        data[0].photos.map((el) => photosData.push(el))
+        data[0].photos.map((el: string) => photosData.push(el))
     } else {
-        data && data.map((el) => {
+        data && data.map((el: IGallery) => {
 
             if (value === el.title) {
-                el.photos.map((el) => photosData.push(el))
+                el.photos.map((el: string) => photosData.push(el))
             }
         })
     }
@@ -145,7 +146,7 @@ export const NewGallery = () => {
             <HomeBlockTemplate title="">
                 <div className={styles["tabs-grid"]}>
                     {data && data.length > 0 &&
-                        data.map((el) => {
+                        data.map((el: IGallery) => {
 
                             return (
                                 <div
