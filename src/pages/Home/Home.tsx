@@ -22,6 +22,8 @@ import { ToFormButton } from './../../components/buttons/toFormButton';
 
 import styles from "./Home.module.scss";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { log } from "console";
 
 export const DimensionsFunc = (src: string, setDimensions: (value: { width: number, height: number }) => void) => {
   const img = new Image();

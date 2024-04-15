@@ -3,9 +3,12 @@
 
 .layout {
   width: 100%;
+  min-height: 100vh;
   padding-top: 84px;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
   @media (max-width: 768px) {
     padding-top: 80px;
   }
