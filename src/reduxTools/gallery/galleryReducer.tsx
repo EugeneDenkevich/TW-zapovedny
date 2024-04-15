@@ -1,6 +1,6 @@
-import {GalleryActions, SET_CURRENT_PAGE, SET_EMPTY_ARRAY, SET_PER_PAGE, SET_PHOTOS, SET_TOTAL_COUNT} from "./actions";
+import { GalleryActions, SET_CURRENT_PAGE, SET_EMPTY_ARRAY, SET_PER_PAGE, SET_PHOTOS, SET_TOTAL_COUNT } from "./actions";
 
-interface ItemState {
+export interface ItemState {
     url: string,
     width: number,
     height: number,
@@ -26,16 +26,16 @@ export const galleryReducer = (
 ): GalleryState => {
     switch (action.type) {
         case SET_PHOTOS:
-            const newItem = {url: action.payload.url, width: action.payload.width, height: action.payload.height}
+            const newItem = { url: action.payload.url, width: action.payload.width, height: action.payload.height }
             return {
                 ...state,
                 items: [...state.items, newItem]
             }
-            case SET_EMPTY_ARRAY:
-                return {
-                    ...state,
-                    items: action.payload.array
-                }
+        case SET_EMPTY_ARRAY:
+            return {
+                ...state,
+                items: action.payload.array
+            }
         case SET_CURRENT_PAGE:
             return {
                 ...state,

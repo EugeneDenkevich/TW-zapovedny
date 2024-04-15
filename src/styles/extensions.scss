@@ -35,7 +35,7 @@
     position: absolute;
     display: block;
     width: 90%;
-    max-height: 80%;
+    // max-height: 80%;
     object-fit: contain;
     top: 50%;
     left: 50%;
@@ -135,7 +135,7 @@
 
   & :global(.image-gallery-svg) {
     polyline, path {
-      color: $text-color;
+      color: $colorWhite;
     }
   }
 }

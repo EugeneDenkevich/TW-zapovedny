@@ -3,6 +3,7 @@ import ImageGallery from "react-image-gallery";
 import { ImagesGallery } from "../../types";
 
 import "./ImageGalleryCarousel.scss";
+import { useRef } from "react";
 
 interface IProps {
   images: string[];
@@ -10,6 +11,15 @@ interface IProps {
 }
 
 export const MyGallery = (props: IProps) => {
+
+  const galleryRef = useRef<ImageGallery>(null);
+
+  const openFullscreen = () => {
+    const galleryElement = galleryRef.current;
+    if (galleryElement && galleryElement.fullScreen) {
+      galleryElement.fullScreen();
+    }
+  };
 
   function getImgSize(imgSrc: string) {
     let newImg = new Image();
@@ -36,6 +46,8 @@ export const MyGallery = (props: IProps) => {
     <ImageGallery
       items={images}
       showPlayButton={false}
+      onClick={openFullscreen}
+      ref={galleryRef}
       thumbnailPosition={props.thumbnailPosition ? "right" : "bottom"}
     />
   );

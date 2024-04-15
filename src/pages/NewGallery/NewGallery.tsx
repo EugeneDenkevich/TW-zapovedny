@@ -1,31 +1,32 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {BeatLoader} from "react-spinners";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { BeatLoader } from "react-spinners";
 
-import {ArrowNext} from "../../assets/icons/ArrowNext";
-import {ArrowPrev} from "../../assets/icons/ArrowPrev";
-import {HomeBlockTemplate} from "../../components/HomeBlockTemplate";
-import {useGetGalleryQuery} from "../../reduxTools/requests/apiRequests";
+import { ArrowNext } from "../../assets/icons/ArrowNext";
+import { ArrowPrev } from "../../assets/icons/ArrowPrev";
+import { HomeBlockTemplate } from "../../components/HomeBlockTemplate";
+import { useGetGalleryQuery } from "../../reduxTools/requests/apiRequests";
 
-import {ToFormButton} from "./../../components/buttons/toFormButton/ToFormButton";
+import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
 import styles from "./NewGallery.module.scss";
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../../reduxTools/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../reduxTools/store";
 import {
     setCurrentPage,
     setEmptyArrayItems,
     setPerPage,
 } from "../../reduxTools/gallery/actions";
-import {createPages} from "../../utils/pagesCreator";
+import { createPages } from "../../utils/pagesCreator";
 import Carousel from "../../components/Carousel";
-import Slider, {Settings} from "react-slick";
-import {newGetImgSize3} from "../../utils/imgSize";
+import Slider, { Settings } from "react-slick";
+import { newGetImgSize3 } from "../../utils/imgSize";
+import { ItemState } from "../../reduxTools/gallery/galleryReducer";
 
 export const NewGallery = () => {
     const dispatch = useDispatch();
-    const {data} = useGetGalleryQuery();
+    const { data } = useGetGalleryQuery();
     const [value, setValue] = useState<string | undefined>("");
-    const [currentImage, setCurrentImage] = useState(0);
+    const [currentImage, setCurrentImage] = useState("");
     const [isViewerOpen, setIsViewerOpen] = useState(false);
 
     const items = useSelector((state: AppState) => state.gallery.items);
@@ -75,13 +76,13 @@ export const NewGallery = () => {
 
     const windowWidth = window.innerWidth;
 
-    const openImageViewer = useCallback((index: number) => {
-        setCurrentImage(index);
+    const openImageViewer = useCallback((image: string) => {
+        setCurrentImage(image);
         setIsViewerOpen(true);
     }, []);
 
     const closeImageViewer = () => {
-        setCurrentImage(0);
+        // setCurrentImage(0);
         setIsViewerOpen(false);
     };
 
@@ -133,7 +134,7 @@ export const NewGallery = () => {
     } else if (!data) {
         return (
             <div className={styles.preload}>
-                <BeatLoader color="#583711"/>
+                <BeatLoader color="#583711" />
             </div>
         )
     }
@@ -174,35 +175,35 @@ export const NewGallery = () => {
                 <div className={styles["images-grid"]}>
                     {windowWidth > 420 ?
                         items.length <= perPage ?
-                            items.map((el, index) => {
+                            items.map((el: ItemState, index: number) => {
 
                                 return <div className={styles.imageBlock}
-                                            key={index.toString()}
-                                            onClick={() => openImageViewer(index)}
+                                    key={index.toString()}
+                                    onClick={() => openImageViewer(el.url)}
                                 >
-                                    <img src={el.url} alt={"photo"}
-                                         className={(el.width - el.height) > 0 ?
-                                             `${styles.image} ${styles.cover}`
-                                             : `${styles.image} ${styles.contain}`}
+                                    <img src={el.url} alt={"photoGallery"}
+                                        className={(el.width - el.height) > 0 ?
+                                            `${styles.image} ${styles.cover}`
+                                            : `${styles.image} ${styles.contain}`}
                                     />
                                 </div>
 
                             }) :
-                            items.slice(start, end).map((el, index) => {
+                            items.slice(start, end).map((el: ItemState, index: number) => {
                                 return <div className={styles.imageBlock}
-                                            key={index.toString()}
-                                            onClick={() => openImageViewer(index)}
+                                    key={index.toString()}
+                                    onClick={() => openImageViewer(el.url)}
                                 >
-                                    <img src={el.url} alt={"photo"}
-                                         className={(el.width - el.height) > 0 ?
-                                             `${styles.image} ${styles.cover}`
-                                             : `${styles.image} ${styles.contain}`}
+                                    <img src={el.url} alt={"photoGallery"}
+                                        className={(el.width - el.height) > 0 ?
+                                            `${styles.image} ${styles.cover}`
+                                            : `${styles.image} ${styles.contain}`}
                                     />
                                 </div>
                             })
                         :
                         <Carousel settings={gallerySliderSettings} slider={slider}>
-                            {photosData.map((el, index) => {
+                            {photosData.map((el: string, index: number) => {
 
                                 let newImg = new Image();
                                 newImg.src = el;
@@ -211,12 +212,12 @@ export const NewGallery = () => {
                                 let dif = width - height;
 
                                 return <div className={styles.imageBlock}
-                                            key={index.toString()}
-                                            onClick={() => openImageViewer(index)}>
-                                    <img src={el} alt={"photo"}
-                                         className={dif > 0 ?
-                                             `${styles.image} ${styles.cover}`
-                                             : `${styles.image} ${styles.contain}`}
+                                    key={index.toString()}
+                                    onClick={() => openImageViewer(el)}>
+                                    <img src={el} alt={"photoGallery"}
+                                        className={dif > 0 ?
+                                            `${styles.image} ${styles.cover}`
+                                            : `${styles.image} ${styles.contain}`}
                                     />
                                 </div>
                             })}
@@ -237,30 +238,33 @@ export const NewGallery = () => {
                 </div>
             </HomeBlockTemplate>
             <HomeBlockTemplate title="">
-                <ToFormButton className={styles.form}/>
+                <ToFormButton className={styles.form} />
             </HomeBlockTemplate>
             {isViewerOpen && (
                 <div className={styles["image-viewer"]}>
                     <div className={styles["photo-view"]}>
-                        <img src={photosData && photosData[currentImage]} alt=""/>
+                        <img src={currentImage} alt="" />
                         <ArrowPrev
                             onClick={() => {
-                                if (currentImage > 0) {
-                                    setCurrentImage((prev) => --prev);
+                                const currentIndex = photosData.findIndex(img => img === currentImage);
+                                if (currentIndex > 0) {
+                                    setCurrentImage(photosData[currentIndex - 1]);
                                 }
                             }}
                             className={styles["arrow-prev"]}
                         />
                         <ArrowNext
                             onClick={() => {
-                                if (photosData && currentImage < photosData.length - 1) {
-                                    setCurrentImage((prev) => ++prev);
+                                const currentIndex = photosData.findIndex(img => img === currentImage);
+                                if (currentIndex < photosData.length - 1) {
+                                    const nextImage = photosData[currentIndex + 1];
+                                    setCurrentImage(nextImage);
                                 }
                             }}
                             className={styles["arrow-next"]}
                         />
                         <div
-                            onClick={() => setIsViewerOpen(false)}
+                            onClick={closeImageViewer}
                             className={styles["close"]}
                         >
                             &#10006;
