@@ -161,15 +161,6 @@ export const Form = () => {
                             icon={<Name />}
                             error={errors["fio"] ? true : false}
                         />
-                        {/* <SelectComponent
-                            optionBase={gender}
-                            label="Пол"
-                            icon={<Persons/>}
-                            name="sex"
-                            required={true}
-                            isSearchable={true}
-                            error={errors["sex"] ? true : false}
-                        /> */}
                     </div>
                     <div className={`${styles.grid} ${styles["second-grid"]}`}>
                         <SelectComponent
