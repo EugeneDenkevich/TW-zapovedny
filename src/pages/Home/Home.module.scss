@@ -261,6 +261,12 @@
     }
     @extend %arrowsBlack;
     @extend %dots;
+
+    & :global(.slick-dots) {
+      @media (max-width: 768px) {
+            margin-top: 0px;
+          }
+  }
   }
 
   button {
@@ -305,6 +311,10 @@
 
   @extend %arrowsBlack;
   @extend %dots;
+
+  & :global(.slick-dots) {
+    top: 44%;
+  }
 
   & :global(.slick-arrow) {
     top: 44%;

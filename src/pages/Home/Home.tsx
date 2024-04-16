@@ -1,28 +1,29 @@
 // import {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {Settings} from "react-slick";
-import {BeatLoader} from "react-spinners";
+import { useNavigate } from "react-router-dom";
+import { Settings } from "react-slick";
+import { BeatLoader } from "react-spinners";
 
 import BackgroundBlockImage from "../../components/BackgroundBlockImage";
-import {MainButton} from "../../components/buttons/mainButton/MainButton";
-import {EntertainmentCard} from "../../components/cards/EntertainmentCard/EntertainmentCard";
-import {HouseLittleCard} from "../../components/cards/HouseLittleCard";
-import {KitchenCard} from "../../components/cards/KitchenCard";
-import {Carousel} from "../../components/Carousel/Carousel";
-import {Container} from "../../components/Container/Container";
-import {HomeBlockTemplate} from "../../components/HomeBlockTemplate/HomeBlockTemplate";
+import { MainButton } from "../../components/buttons/mainButton/MainButton";
+import { EntertainmentCard } from "../../components/cards/EntertainmentCard/EntertainmentCard";
+import { HouseLittleCard } from "../../components/cards/HouseLittleCard";
+import { KitchenCard } from "../../components/cards/KitchenCard";
+import { Carousel } from "../../components/Carousel/Carousel";
+import { Container } from "../../components/Container/Container";
+import { HomeBlockTemplate } from "../../components/HomeBlockTemplate/HomeBlockTemplate";
 import {
   useGetDishesQuery, useGetEntertainmentsQuery, useGetMainPageQuery,
-useGetObjectsQuery} from "../../reduxTools/requests/apiRequests";
-import {useDatas} from "../../services/useDatas"
+  useGetObjectsQuery
+} from "../../reduxTools/requests/apiRequests";
+import { useDatas } from "../../services/useDatas"
 import { useRate } from "../../services/useRate";
 
-import {ToFormButton} from './../../components/buttons/toFormButton';
+import { ToFormButton } from './../../components/buttons/toFormButton';
 
 import styles from "./Home.module.scss";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
-export const DimensionsFunc = (src: string, setDimensions: (value: {width: number, height: number}) => void) => {
+export const DimensionsFunc = (src: string, setDimensions: (value: { width: number, height: number }) => void) => {
   const img = new Image();
 
   img.src = src;
@@ -45,14 +46,14 @@ export const getImgSize = (imgSrc: string) => {
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const {data: houses} = useGetObjectsQuery();
-  const {data: dishes} = useGetDishesQuery();
-  const {data: entertainments} = useGetEntertainmentsQuery();
-  const {data: mainPage} = useGetMainPageQuery();
+  const { data: houses } = useGetObjectsQuery();
+  const { data: dishes } = useGetDishesQuery();
+  const { data: entertainments } = useGetEntertainmentsQuery();
+  const { data: mainPage } = useGetMainPageQuery();
   const navigate = useNavigate();
   const datas = useDatas();
-  const {currency, cur_rate, cur_scale} = useRate();
-  const {title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton} = datas;
+  const { currency, cur_rate, cur_scale } = useRate();
+  const { title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton } = datas;
 
   const sliderFaceBlockSettings: Settings = {
     slidesToShow: 1,
@@ -108,7 +109,7 @@ export const Home = () => {
         settings: {
           arrows: false,
           slidesToShow: 1,
-          slidesPerRow: 4,
+          slidesPerRow: 2,
           slidesToScroll: 1,
         }
       },
@@ -145,106 +146,106 @@ export const Home = () => {
   };
 
   return (
-      <>
-        <div className={styles["face-block"]}>
-          <BackgroundBlockImage image={main_back}/>
-          <Container>
-            <div className={styles["content-container"]}>
-              <div className={styles["left-side"]}>
-                <div className={styles.title}>{title}</div>
-                <p className={styles.descriptionTitle}>{mainPage && mainPage[0].description}</p>
-              </div>
-              <div className={styles["right-side"]}>
-                <Carousel settings={sliderFaceBlockSettings}>
-                  {mainPage && mainPage[0].photos.map((el, index) => {
-                    return <img key={index.toString()} src={el} alt="pict"/>;
-                  })}
-                </Carousel>
-              </div>
+    <>
+      <div className={styles["face-block"]}>
+        <BackgroundBlockImage image={main_back} />
+        <Container>
+          <div className={styles["content-container"]}>
+            <div className={styles["left-side"]}>
+              <div className={styles.title}>{title}</div>
+              <p className={styles.descriptionTitle}>{mainPage && mainPage[0].description}</p>
             </div>
-            <ToFormButton
-                value={title}
-                buttonValue={nameForSearchButton}
-                className={styles.form}
-            />
-          </Container>
+            <div className={styles["right-side"]}>
+              <Carousel settings={sliderFaceBlockSettings}>
+                {mainPage && mainPage[0].photos.map((el, index) => {
+                  return <img key={index.toString()} src={el} alt="pict" />;
+                })}
+              </Carousel>
+            </div>
+          </div>
+          <ToFormButton
+            value={title}
+            buttonValue={nameForSearchButton}
+            className={styles.form}
+          />
+        </Container>
+      </div>
+      <HomeBlockTemplate title={titleHouse} className={styles.houses}>
+        <div className={styles.blockDescription}>{mainPage && mainPage[0].house_description}</div>
+        <div className={styles["houses-carousel"]}>
+          {houses && houses.length > 0 ? (
+            <Carousel settings={housesSliderSettings}>
+              {houses.map((el) => (
+                <HouseLittleCard
+                  key={el.id}
+                  currency={currency}
+                  cur_scale={cur_scale}
+                  cur_rate={cur_rate}
+                  {...el}
+                />
+              ))}
+            </Carousel>) : houses && houses.length === 0 ? (
+              <div></div>
+            ) : (
+            <div className={styles.preload}>
+              <BeatLoader color="#583711" />
+            </div>)
+          }
         </div>
-        <HomeBlockTemplate title={titleHouse} className={styles.houses}>
-          <div className={styles.blockDescription}>{mainPage && mainPage[0].house_description}</div>
-          <div className={styles["houses-carousel"]}>
-            {houses&&houses.length>0 ? (
-                <Carousel settings={housesSliderSettings}>
-                  {houses.map((el) => (
-                      <HouseLittleCard
-                          key={el.id}
-                          currency = {currency}
-                          cur_scale = {cur_scale}
-                          cur_rate = {cur_rate} 
-                          {...el}
-                      />
-                  ))}
-                </Carousel>) : houses&&houses.length===0?(           
-            <div></div>             
-           ):(
-                <div className={styles.preload}>
-                  <BeatLoader color="#583711"/>
-                </div>)
-            }
-          </div>
-          <MainButton value="Подробнее" handler={() => navigate("/houses")}/>
-        </HomeBlockTemplate>
+        <MainButton value="Подробнее" handler={() => navigate("/houses")} />
+      </HomeBlockTemplate>
 
-        <HomeBlockTemplate title={titleKitchen} className={styles.kitchen}>
-          <div className={styles.blockDescription}>{mainPage && mainPage[0].kitchen_description}</div>
-          <div className={styles["carousel-container"]}>
-            {dishes ? (
-                <Carousel settings={kitchenSliderSettings}>
-                  {dishes.map((el) => (
-                      <KitchenCard
-                          key={el.id}
-                          id={el.id}
-                          photo={el.photo}
-                          title={el.title}
-                          description={el.description}
-                      />
-                  ))
-                  }
-                </Carousel>) : (
-                <div className={styles.preload}>
-                  <BeatLoader color="#583711"/>
-                </div>)
-            }
-          </div>
-        </HomeBlockTemplate>
-        <HomeBlockTemplate title={titleEntertainment}>
-          <div className={styles.blockDescription}> {mainPage && mainPage[0].entertainment_description} </div>
-          <div className={styles["entertainment-container"]}>
-            {entertainments ? entertainments.slice(0, 6).map((el, index) => {
-              return (
-                  <EntertainmentCard
-                      title={el.title}
-                      photos={el.photos}
-                      key={el.id}
-                      id={el.id}
-                  />
-              );
-            }) : (
-                <div className={styles.preload}>
-                  <BeatLoader color="#583711"/>
-                </div>
-            )}
-          </div>
+      <HomeBlockTemplate title={titleKitchen} className={styles.kitchen}>
+        <div className={styles.blockDescription}>{mainPage && mainPage[0].kitchen_description}</div>
+        <div className={styles["carousel-container"]}>
+          {dishes ? (
+            <Carousel settings={kitchenSliderSettings}>
+              {dishes.map((el) => (
+                <KitchenCard
+                  key={el.id}
+                  id={el.id}
+                  photo={el.photo}
+                  title={el.title}
+                  description={el.description}
+                />
+              ))
+              }
+            </Carousel>) : (
+            <div className={styles.preload}>
+              <BeatLoader color="#583711" />
+            </div>)
+          }
+        </div>
+      </HomeBlockTemplate>
+      <HomeBlockTemplate title={titleEntertainment}>
+        <div className={styles.blockDescription}> {mainPage && mainPage[0].entertainment_description} </div>
+        <div className={styles["entertainment-container"]}>
+          {entertainments ? entertainments.slice(0, 6).map((el, index) => {
+            return (
+              <EntertainmentCard
+                title={el.title}
+                photos={el.photos}
+                key={el.id}
+                id={el.id}
+              />
+            );
+          }) : (
+            <div className={styles.preload}>
+              <BeatLoader color="#583711" />
+            </div>
+          )}
+        </div>
         <div className={styles.blockBtn}>
           <MainButton
-              value="Подробнее"
-              className={styles["entertainment-button"]}
-              handler={() => navigate("/entertainments")}
+            value="Подробнее"
+            className={styles["entertainment-button"]}
+            handler={() => navigate("/entertainments")}
           />
         </div>
-        </HomeBlockTemplate>
-        <HomeBlockTemplate>
-          <ToFormButton value={title} buttonValue={nameForSearchButton}/>
-        </HomeBlockTemplate>
-      </>
+      </HomeBlockTemplate>
+      <HomeBlockTemplate>
+        <ToFormButton value={title} buttonValue={nameForSearchButton} />
+      </HomeBlockTemplate>
+    </>
   );
 };

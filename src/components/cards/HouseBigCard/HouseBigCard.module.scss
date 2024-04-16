@@ -46,36 +46,24 @@
     @media (max-width: 1120px) {
       flex-direction: column-reverse;
     }
-    @media (max-width: 768px) {
-      gap: 0px;
-    }
 
     .title {
       @include text($text-color, null, 600, normal, uppercase);
       @include adaptive-value(font-size, 35, 18);
       margin: 0;
-      min-width: 0px;
-      max-width: 500px;
+      width: 100%;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       @media (max-width: 1120px) {
+        width: 82%;
         padding: 0px 15px;
         text-transform: none;
       }
-      @media (max-width: 768px) {
+        @media (max-width: 768px) {
         @include text($text-color, null, 500, normal, none);
-        max-width: 250px;
       }
-      @media (max-width: 670px) {
-        max-width: 180px;
-      }
-      @media (max-width: 500px) {
-        max-width: 250px;
-      }
-      @media (max-width: 360px) {
-        max-width: 200px;
-      }
+    
     }
 
     & :global(.slick-slider) {
@@ -150,13 +138,13 @@
           gap: 4px;
         }
         @media (max-width: 768px) {
-          top: 237px;
+          top: 262px;
         }
         @media (max-width: 500px) {
-          top: 291px;
+          top: 316px;
         }
         @media (max-width: 360px) {
-          top: 234px;
+          top: 259px;
         }
 
         div {
