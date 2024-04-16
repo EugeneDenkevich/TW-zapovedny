@@ -1,27 +1,27 @@
-import {ChangeEvent,useEffect, useRef, useState} from "react";
-import {Controller, DefaultValues,FormProvider, useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { Controller, DefaultValues, FormProvider, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
-import {Adress} from "../../../assets/icons/inputIcons/Adress";
-import {Email} from "../../../assets/icons/inputIcons/Email";
-import {HouseIcon} from "../../../assets/icons/inputIcons/HouseIcon";
-import {Name} from "../../../assets/icons/inputIcons/Name";
-import {Passport} from "../../../assets/icons/inputIcons/Passport";
-import {Persons} from "../../../assets/icons/inputIcons/Persons";
-import {Pets} from "../../../assets/icons/inputIcons/Pets";
-import {Phone} from "../../../assets/icons/inputIcons/Phone";
-import {Telegram} from "../../../assets/icons/inputIcons/Telegram";
-import {closeFormStateAction} from "../../../reduxTools/formForOrderHouse/actions";
-import {useCreatePurchaseMutation,useGetObjectsQuery} from "../../../reduxTools/requests/apiRequests";
-import {getErrorText} from "../../../services/errorText";
-import {countNumber, country, FormValues, gender, Purchases} from "../../../types";
-import {MainButton} from "../../buttons/mainButton/MainButton";
-import {Calendar} from "../Calendar";
-import {FormInput} from "../FormInput";
-import {SelectComponent} from "../SelectComponent";
+import { Adress } from "../../../assets/icons/inputIcons/Adress";
+import { Email } from "../../../assets/icons/inputIcons/Email";
+import { HouseIcon } from "../../../assets/icons/inputIcons/HouseIcon";
+import { Name } from "../../../assets/icons/inputIcons/Name";
+import { Passport } from "../../../assets/icons/inputIcons/Passport";
+import { Persons } from "../../../assets/icons/inputIcons/Persons";
+import { Pets } from "../../../assets/icons/inputIcons/Pets";
+import { Phone } from "../../../assets/icons/inputIcons/Phone";
+import { Telegram } from "../../../assets/icons/inputIcons/Telegram";
+import { closeFormStateAction } from "../../../reduxTools/formForOrderHouse/actions";
+import { useCreatePurchaseMutation, useGetObjectsQuery } from "../../../reduxTools/requests/apiRequests";
+import { getErrorText } from "../../../services/errorText";
+import { countNumber, country, FormValues, gender, Purchases } from "../../../types";
+import { MainButton } from "../../buttons/mainButton/MainButton";
+import { Calendar } from "../Calendar";
+import { FormInput } from "../FormInput";
+import { SelectComponent } from "../SelectComponent";
 
 import Modal from "./../../Modal";
-import {PolicyAgreement} from './../../PolicyAgreement/PolicyAgreement';
+import { PolicyAgreement } from './../../PolicyAgreement/PolicyAgreement';
 
 import styles from "./Form.module.scss";
 
@@ -59,10 +59,10 @@ export const Form = () => {
         handleSubmit,
         control,
         reset,
-        formState: {errors},
+        formState: { errors },
         register
     } = methods;
-    const {data: houses} = useGetObjectsQuery();
+    const { data: houses } = useGetObjectsQuery();
     const [createPurchase] = useCreatePurchaseMutation();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -81,7 +81,7 @@ export const Form = () => {
     useEffect(resizeTextArea);
 
     const onSubmit = (data: FormValues) => {
-        
+
         const purchase: Purchases = {
             object: data.object.value,
             fio: data.fio,
@@ -110,7 +110,7 @@ export const Form = () => {
                 dispatch(closeFormStateAction())
             })
             .catch((error) => {
-                
+
                 setOpenModal(true);
                 setMyClass("danger wrapper");
                 setModalContent(getErrorText(error.data?.detail))
@@ -124,7 +124,7 @@ export const Form = () => {
         setTypeModal(type)
     }
 
-    let countAdult: countNumber[] = Array.from({length: 20}, (_, i) => i + 1).map((item) => ({
+    let countAdult: countNumber[] = Array.from({ length: 20 }, (_, i) => i + 1).map((item) => ({
         title: item
     }));
     let countKids: countNumber[] = Array.from(Array(10).keys()).map((item) => ({
@@ -134,7 +134,7 @@ export const Form = () => {
     if (houses === undefined) {
         return null;
     }
-    
+
     return (
         <>
             <FormProvider {...methods} >
@@ -143,13 +143,13 @@ export const Form = () => {
                         <SelectComponent
                             optionBase={houses}
                             label="Домик"
-                            icon={<HouseIcon/>}
+                            icon={<HouseIcon />}
                             name="object"
                             required={true}
                             isSearchable={false}
                             error={errors["object"] ? true : false}
                         />
-                        <Calendar/>
+                        <Calendar />
                     </div>
                     <div className={`${styles.grid} ${styles["second-grid"]}`}>
                         <FormInput
@@ -158,10 +158,10 @@ export const Form = () => {
                             name="fio"
                             required={true}
                             placeholder="Иванов Иван Иванович"
-                            icon={<Name/>}
+                            icon={<Name />}
                             error={errors["fio"] ? true : false}
                         />
-                        <SelectComponent
+                        {/* <SelectComponent
                             optionBase={gender}
                             label="Пол"
                             icon={<Persons/>}
@@ -169,13 +169,13 @@ export const Form = () => {
                             required={true}
                             isSearchable={true}
                             error={errors["sex"] ? true : false}
-                        />
+                        /> */}
                     </div>
                     <div className={`${styles.grid} ${styles["second-grid"]}`}>
                         <SelectComponent
                             optionBase={country}
                             label="Страна проживания"
-                            icon={<Passport/>}
+                            icon={<Passport />}
                             name="passport_country"
                             required={true}
                             isSearchable={true}
@@ -187,7 +187,7 @@ export const Form = () => {
                             name="address"
                             required={true}
                             placeholder="ул. Ленина 42, кв 42, г. Минск, Беларусь"
-                            icon={<Adress/>}
+                            icon={<Adress />}
                             error={errors["address"] ? true : false}
                         />
                     </div>
@@ -199,7 +199,7 @@ export const Form = () => {
                             name="phone_number"
                             required={true}
                             placeholder="+375 (29) 123-45-67"
-                            icon={<Phone/>}
+                            icon={<Phone />}
                             error={errors["phone_number"] ? true : false}
                             pattern={/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){7,14}(\s*)?$/}
                         />
@@ -209,7 +209,7 @@ export const Form = () => {
                             name="email"
                             required={true}
                             placeholder="ivanov@gmail.com"
-                            icon={<Email/>}
+                            icon={<Email />}
                             error={errors["email"] ? true : false}
                             pattern={/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
                         />
@@ -219,7 +219,7 @@ export const Form = () => {
                             name="telegram"
                             required={false}
                             placeholder="@ivanov"
-                            icon={<Telegram/>}
+                            icon={<Telegram />}
                             error={errors["telegram"] ? true : false}
                         />
                     </div>
@@ -228,7 +228,7 @@ export const Form = () => {
                         <SelectComponent
                             optionBase={countAdult}
                             label="Количество взрослых"
-                            icon={<Persons/>}
+                            icon={<Persons />}
                             name="count_adult"
                             required={true}
                             isSearchable={true}
@@ -236,8 +236,8 @@ export const Form = () => {
                         />
                         <SelectComponent
                             optionBase={countKids}
-                            label="Количество детей"
-                            icon={<Persons/>}
+                            label="Количество детей до 10 лет"
+                            icon={<Persons />}
                             name="count_kids"
                             required={true}
                             isSearchable={true}
@@ -250,28 +250,28 @@ export const Form = () => {
                             name="pets"
                             required={false}
                             placeholder="Собака Корги"
-                            icon={<Pets/>}
+                            icon={<Pets />}
                             error={errors["pets"] ? true : false}
                         />
                     </div>
                     <div className={styles["textarea-container"]}>
 
                         <input type="checkbox" id="agr"
-                               className={errors["agreement"] ? `${styles["customCheckbox"]} ${styles["error"]}` : styles["customCheckbox"]}
-                               {...register("agreement", {
-                                   required: true,
-                               })}>
+                            className={errors["agreement"] ? `${styles["customCheckbox"]} ${styles["error"]}` : styles["customCheckbox"]}
+                            {...register("agreement", {
+                                required: true,
+                            })}>
                         </input>
                         <label htmlFor="agr" className={errors["agreement"] ? `${styles["error"]}` : undefined}></label>
                         <span> Даю согласие на обработку моих персональных данных в соответствии с
-              <span className={styles["modal-link"]} onClick={() => openPolicy("policy")}> Политикой </span>
-              и <span className={styles["modal-link"]} onClick={() => openPolicy("agreement")}>Пользовательским соглашением</span>
-            </span>
+                            <span className={styles["modal-link"]} onClick={() => openPolicy("policy")}> Политикой </span>
+                            и <span className={styles["modal-link"]} onClick={() => openPolicy("agreement")}>Пользовательским соглашением</span>
+                        </span>
                     </div>
                     <div className={styles["textarea-container"]}>
                         <p>Комментарий</p>
                         <Controller
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <textarea
                                     {...field}
                                     placeholder="Комментарий"
@@ -294,14 +294,14 @@ export const Form = () => {
             </FormProvider>
             {openModal &&
                 <Modal myClass={myClass}
-                       content={modalContent}
-                       onClose={() => setOpenModal(false)}
-                       isOpen={true}
+                    content={modalContent}
+                    onClose={() => setOpenModal(false)}
+                    isOpen={true}
                 />}
             {isOpenPolicy &&
                 <PolicyAgreement type={typeModal}
-                                 onClose={() => setIsOpenPolicy(false)}
-                                 isOpen={true}
+                    onClose={() => setIsOpenPolicy(false)}
+                    isOpen={true}
                 />}
         </>)
 };
