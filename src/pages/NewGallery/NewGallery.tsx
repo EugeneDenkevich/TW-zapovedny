@@ -243,7 +243,7 @@ export const NewGallery = () => {
             {isViewerOpen && (
                 <div className={styles["image-viewer"]}>
                     <div className={styles["photo-view"]}>
-                        <img src={currentImage} alt="" />
+                        <img src={currentImage} alt="fullImage" />
                         <ArrowPrev
                             onClick={() => {
                                 const currentIndex = photosData.findIndex(img => img === currentImage);

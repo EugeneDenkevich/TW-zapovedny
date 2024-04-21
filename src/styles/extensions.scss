@@ -66,11 +66,12 @@
       display: none;
     }
 
-    & :global(.image-gallery-fullscreen-button) {
-      top: 0px;
-      transform: translateY(-100%);
-      bottom: unset;
-    }
+    // & :global(.image-gallery-fullscreen-button) {
+    //   display: none;
+      // top: 0px;
+      // transform: translateY(-100%);
+      // bottom: unset;
+    // }
 
     & :global(.image-gallery-icon.image-gallery-fullscreen-button) {
       & svg {

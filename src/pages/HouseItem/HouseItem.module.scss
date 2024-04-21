@@ -195,7 +195,12 @@ $triangles-height: calc($height / 2);
     & :global(.image-gallery-icon) {
       z-index: 1;
     }
+
     @extend %fullscreen;
+
+    // & :global(.image-gallery-icon.image-gallery-fullscreen-button) { 
+    //     display: none !important; 
+    // }
   }
 
   .description-short,
