@@ -21,6 +21,7 @@ import Carousel from "../../components/Carousel";
 import Slider, { Settings } from "react-slick";
 import { newGetImgSize3 } from "../../utils/imgSize";
 import { ItemState } from "../../reduxTools/gallery/galleryReducer";
+import { IGallery } from "../../types";
 
 export const NewGallery = () => {
     const dispatch = useDispatch();
@@ -63,9 +64,9 @@ export const NewGallery = () => {
 
     }, [data]);
 
-    useLayoutEffect(() => {
-        data && newGetImgSize3(data[0].photos, dispatch);
-    }, [data])
+    // useLayoutEffect(() => {
+    //     data && newGetImgSize3(data[0].photos, dispatch);
+    // }, [data])
 
     useEffect(() => {
         const windowWidth = window.innerWidth;
@@ -143,8 +144,7 @@ export const NewGallery = () => {
                 <BeatLoader color="#583711" />
             </div>
         )
-    }
-    ;
+    };
 
     return (
         <>
