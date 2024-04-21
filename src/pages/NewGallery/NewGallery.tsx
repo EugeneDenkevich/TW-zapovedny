@@ -58,8 +58,8 @@ export const NewGallery = () => {
             setValue(data[0].title);
         };
 
+        data && newGetImgSize3(data[0].photos, dispatch);
         data && data.length && data[0].photos && setTotalCount(data[0].photos.length);
-
         dispatch(setCurrentPage(1))
 
     }, [data]);
