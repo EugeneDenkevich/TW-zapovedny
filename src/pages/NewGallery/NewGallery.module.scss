@@ -221,5 +221,6 @@
 
 .cap {
   @include text($text-color, 20px, 500, 24px, none);
+  @include flex(row, center, center, nowrap);
   padding: 30px;
 }

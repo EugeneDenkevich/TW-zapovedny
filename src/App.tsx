@@ -15,6 +15,7 @@ import { Rules } from "./pages/Rules";
 import { NewGallery } from "./pages/NewGallery/NewGallery";
 import { useLayoutEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { URL } from "./reduxTools/requests/apiRequests";
 
 function App() {
   const [backendError, setBackendError] = useState(false);
@@ -23,7 +24,7 @@ function App() {
   useLayoutEffect(() => {
     const checkBackendAvailability = async () => {
       try {
-        const res = await fetch("https://api-bot-redis.travelweb.dev/api/");
+        const res = await fetch(URL);
         if (!res.ok) {
           throw new Error("Ошибка сети: " + res.status);
         }

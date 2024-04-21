@@ -16,7 +16,7 @@ import {
 } from "../../types";
 
 // const URL = `https://api-doc.zapovednostrov.by/api/`;
-const URL = `https://api-bot-redis.travelweb.dev/api/`;
+export const URL = `https://api-bot-redis.travelweb.dev/api/`;
 // const URL = `http://vitaem.ru:8080/api/`;
 
 export const api = createApi({

@@ -58,13 +58,10 @@
 }
 
 .hide {
+  display: none;
   width: 0px;
   height: 0px;
 }
-
-//.header-background{
-//  background-color: $primaryColor;
-//}
 
 .container {
   position: fixed;
