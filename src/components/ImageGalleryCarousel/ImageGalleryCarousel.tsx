@@ -21,15 +21,10 @@ export const MyGallery = (props: IProps) => {
     }
   };
 
-  function getImgSize(imgSrc: string) {
-    let newImg = new Image();
-
-    newImg.src = imgSrc;
-
-    let height = newImg.height;
-    let width = newImg.width;
-
-    return (width - height)
+  const getImgSize = (url: string): number => {
+    const img = new Image();
+    img.src = url;
+    return img.width / img.height;
   };
 
   const images: ImagesGallery[] = props.images.map((el) => {
@@ -38,8 +33,8 @@ export const MyGallery = (props: IProps) => {
     return {
       original: el,
       thumbnail: el,
-      originalClass: dif >= 0 ? "coverOrigin" : "containOrigin",
-      thumbnailClass: dif >= 0 ? "coverThumbnail" : "containThumbnail",
+      originalClass: dif >= 1 ? "coverOrigin" : "containOrigin",
+      thumbnailClass: dif >= 1 ? "coverThumbnail" : "containThumbnail",
     };
   });
   return (

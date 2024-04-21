@@ -128,10 +128,11 @@
     }
   }
   & :global(.image-gallery-fullscreen-button) {
-    padding: 5px;
-    width: 60px;
-    height: 60px;
-    @include flex(row, flex-end, flex-end, nowrap);
+    display: none;
+    // padding: 5px;
+    // width: 60px;
+    // height: 60px;
+    // @include flex(row, flex-end, flex-end, nowrap);
   }
 
   & :global(.image-gallery-svg) {

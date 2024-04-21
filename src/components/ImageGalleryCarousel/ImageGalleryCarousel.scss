@@ -2,15 +2,16 @@
 
 .coverOrigin {
   img {
-    object-fit: cover;
+    object-fit: cover !important;
   }
 }
 
 .containOrigin {
   img {
-    object-fit: contain;
+    object-fit: contain !important;
   }
 }
+
 .coverThumbnail {
 
   span > img {
