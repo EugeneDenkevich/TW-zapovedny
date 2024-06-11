@@ -2,25 +2,28 @@
 
 .coverOrigin {
   img {
-    object-fit: cover;
+    object-fit: cover !important;
   }
 }
 
 .containOrigin {
   img {
-    object-fit: contain;
+    object-fit: contain !important;
   }
 }
+
 .coverThumbnail {
 
   span > img {
-    object-fit: cover;
+    object-fit: cover !important;
+    aspect-ratio: 16 / 9;
   }
 }
 
 .containThumbnail {
   span > img {
-    object-fit: contain;
+    object-fit: contain !important;
+    aspect-ratio: 16 / 9;
   }
 }
 

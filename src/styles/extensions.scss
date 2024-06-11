@@ -67,7 +67,7 @@
     }
 
     & :global(.image-gallery-fullscreen-button) {
-      // display: none;
+      display: none;
       top: 0px;
       transform: translateY(-100%);
       bottom: unset;
