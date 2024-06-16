@@ -17,7 +17,8 @@ import {
 
 // export const URL = `https://api-bot-redis.travelweb.dev/api/`;
 // export const URL = `http://vitaem.ru:8080/api/`;
-export const URL = `https://api.zapovedny.travelweb.dev/api/`;
+// export const URL = `https://api.zapovedny.travelweb.dev/api/`;
+export const URL = `https://api-doc.zapovednostrov.by/api/`;
 
 export const api = createApi({
   reducerPath: "api",
