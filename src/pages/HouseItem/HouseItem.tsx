@@ -13,7 +13,7 @@ import {
   useGetObjectCurrentQuery,
 } from "../../reduxTools/requests/apiRequests";
 import { getBedsIcon, getBedsTitle } from "../../services/getBeds";
-import {  getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
+import { getFeaturesIcon, getFeaturesText } from "../../services/getFeatures";
 import { useDatas } from "../../services/useDatas";
 import { useRate } from "../../services/useRate";
 
@@ -27,19 +27,21 @@ export const HouseItem = () => {
   const { title, nameForSearchButton } = datas;
 
   const { currency, cur_rate, cur_scale } = useRate();
-    
+
   const price_weekday = data?.price_weekday
-    ? currency==="BYN"? data.price_weekday
-      : (Math.round((+data.price_weekday / cur_scale) * cur_rate)/ 10)* 10       
-      : null;
-  const price_weekdayScreen = price_weekday? `от ${price_weekday} BYN будние дни` : "цену уточняйте"
-      
+    ? currency === "BYN" ? data.price_weekday
+      : (Math.round((+data.price_weekday / cur_scale) * cur_rate) / 10) * 10
+    : null;
+  // const price_weekdayScreen = price_weekday? `от ${price_weekday} BYN будние дни` : "цену уточняйте"
+  const price_weekdayScreen = price_weekday ? `от ${price_weekday} BYN` : "цену уточняйте"
+
   const price_holiday = data?.price_holiday
-    ? currency==="BYN"? data.price_holiday
-    : (Math.round((+data.price_holiday / cur_scale) * cur_rate)/ 10)* 10      
+    ? currency === "BYN" ? data.price_holiday
+      : (Math.round((+data.price_holiday / cur_scale) * cur_rate) / 10) * 10
     : price_weekday;
 
-    const price_holidayScreen = price_holiday? `от ${price_holiday} BYN выходные дни` : "цену уточняйте"
+  // const price_holidayScreen = price_holiday? `от ${price_holiday} BYN выходные дни` : "цену уточняйте"
+  const price_holidayScreen = price_holiday ? `до ${price_holiday} BYN` : "цену уточняйте"
   if (!data)
     return (
       <div className={styles.preload}>
@@ -47,7 +49,7 @@ export const HouseItem = () => {
       </div>
     );
 
-  
+
   return (
     <>
       {JSON.stringify(data) !== "{}" ? (
@@ -64,7 +66,7 @@ export const HouseItem = () => {
                   </div>
                   <div className={styles["beds-container"]}>
                     {data.rooms_types &&
-                      data.rooms_types.map((el, index)=>{
+                      data.rooms_types.map((el, index) => {
                         for (let i = 0; i < 2; i++) {
                           if (el.type === "Спальня") {
                             return (
@@ -73,8 +75,8 @@ export const HouseItem = () => {
                                 {el.count === 1
                                   ? " спальня"
                                   : el.count < 5
-                                  ? " спальни"
-                                  : " спален"}
+                                    ? " спальни"
+                                    : " спален"}
                               </p>
                             );
                           }
@@ -96,7 +98,7 @@ export const HouseItem = () => {
                 <ToFormButton
                   value={title}
                   buttonValue={nameForSearchButton}
-                  className={styles.form}                  
+                  className={styles.form}
                 />
                 <div className={styles.features}>
                   <h2>Удобства в домике</h2>
@@ -105,15 +107,15 @@ export const HouseItem = () => {
 
                     {data.beds_types && data.beds_types.length > 0 ? (
                       data.beds_types.map((elem) => {
-                        return(
-                        <div className={styles["grid-item"]} key={elem.id}>
-                        {getBedsIcon(elem.id, true)} {elem.count}
-                        {getBedsTitle(elem.id,+elem.count )}
-                       
-                      </div>
+                        return (
+                          <div className={styles["grid-item"]} key={elem.id}>
+                            {getBedsIcon(elem.id, true)} {elem.count}
+                            {getBedsTitle(elem.id, +elem.count)}
+
+                          </div>
                         )
                       })
-                      
+
                     ) : null}
 
                     {data.features?.map((elem, index) => {
@@ -133,10 +135,10 @@ export const HouseItem = () => {
                 </div>
                 {meal && (
                   <LittleKitchenCard
-                  currency = {currency}
-                  cur_rate = {cur_rate}
-                  cur_scale = {cur_scale}
-                  data={meal}                    
+                    currency={currency}
+                    cur_rate={cur_rate}
+                    cur_scale={cur_scale}
+                    data={meal}
                   />
                 )}
               </div>
