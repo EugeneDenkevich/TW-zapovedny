@@ -7,23 +7,29 @@ interface IProps {
 
 const Price = (props: IProps) => {
   const { type, price } = props;
-  if (!price || price===0){
+  if (!price || price === 0) {
     return (
       <div className={styles.container}>
-      <div className={styles.price}>
-        <span> цену уточняйте </span>
+        <div className={styles.price}>
+          <span> цену уточняйте </span>
+        </div>
+
       </div>
-      
-    </div>
     )
   }
   return (
     <div className={styles.container}>
       <div className={styles.price}>
-        от <span>{price} </span>BYN{" "}
+        {type === "weekday" ?
+
+          <>от < span > {price} </span>BYN{" "}</>
+          :
+          <>до < span > {price} </span> BYN{" "}</>
+
+        }
       </div>
-      <p>{type === "weekday" ? "будни" : "выходные"}</p>
-    </div>
+
+    </div >
   );
 };
 

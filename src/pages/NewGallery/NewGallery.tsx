@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 import { ArrowNext } from "../../assets/icons/ArrowNext";
@@ -110,8 +110,7 @@ export const NewGallery = () => {
                 el.photos.map((el: string) => photosData.push(el))
             }
         })
-    }
-    ;
+    };
 
     function handleEsc(event: KeyboardEvent) {
         if (event.keyCode === 27) {
@@ -209,18 +208,19 @@ export const NewGallery = () => {
                             })
                         :
                         <Carousel settings={gallerySliderSettings} slider={slider}>
-                            {photosData.map((el: string, index: number) => {
+                            {/* {photosData.map((el: string, index: number) => { */}
+                            {items.map((el: ItemState, index: number) => {
 
                                 let newImg = new Image();
-                                newImg.src = el;
+                                newImg.src = el.url;
                                 let height = newImg.height;
                                 let width = newImg.width;
                                 let dif = width - height;
 
                                 return <div className={styles.imageBlock}
                                     key={index.toString()}
-                                    onClick={() => openImageViewer(el)}>
-                                    <img src={el} alt={"photoGallery"}
+                                    onClick={() => openImageViewer(el.url)}>
+                                    <img src={el.url} alt={"photoGallery"}
                                         className={dif > 0 ?
                                             `${styles.image} ${styles.cover}`
                                             : `${styles.image} ${styles.contain}`}
@@ -252,18 +252,18 @@ export const NewGallery = () => {
                         <img src={currentImage} alt="fullImage" />
                         <ArrowPrev
                             onClick={() => {
-                                const currentIndex = photosData.findIndex(img => img === currentImage);
+                                const currentIndex = items.findIndex(img => img.url === currentImage);
                                 if (currentIndex > 0) {
-                                    setCurrentImage(photosData[currentIndex - 1]);
+                                    setCurrentImage(items[currentIndex - 1].url);
                                 }
                             }}
                             className={styles["arrow-prev"]}
                         />
                         <ArrowNext
                             onClick={() => {
-                                const currentIndex = photosData.findIndex(img => img === currentImage);
-                                if (currentIndex < photosData.length - 1) {
-                                    const nextImage = photosData[currentIndex + 1];
+                                const currentIndex = items.findIndex(img => img.url === currentImage);
+                                if (currentIndex < items.length - 1) {
+                                    const nextImage = items[currentIndex + 1].url;
                                     setCurrentImage(nextImage);
                                 }
                             }}
