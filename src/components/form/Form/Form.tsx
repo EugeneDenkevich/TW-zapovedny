@@ -85,7 +85,7 @@ export const Form = () => {
         const purchase: Purchases = {
             object: data.object.value,
             fio: data.fio,
-            sex: data.sex.value,
+            // sex: data.sex.value,
             passport_country: data.passport_country.value,
             address: data.address,
             phone_number: data.phone_number,

@@ -162,7 +162,7 @@ export type Policy = {
 export type Purchases = {
   object: number;
   fio: string;
-  sex: string;
+  // sex: string;
   passport_country: string;
   address: string;
   phone_number: string;
