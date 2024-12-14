@@ -21,19 +21,21 @@ export const ToFormButton = (props: IProps) => {
     value = "Заповедный остров",
     className    
   } = props;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   return (
     <div className={className ? `${styles.form} ${className}` : styles.form}>
       <p>{value}</p>
-      <MainButton
-        value={buttonValue}
-        handler={() => {
-          document.body.style.overflow = "hidden";
-          dispatch(openFormStateAction());
-          navigate("form");
-        }}
-      />
+      <a href="https://client.vitaem.app/ab42fa60-fb63-4b6f-a40f-8f8c86ab17dd" target="blank" rel="noopener noreferrer">
+        <MainButton
+          value={buttonValue}
+          // handler={() => {
+          //   document.body.style.overflow = "hidden";
+          //   dispatch(openFormStateAction());
+          //   navigate("form");
+          // }}
+        />
+      </a>
     </div>
   );
 };

@@ -144,14 +144,17 @@ const HouseBigCard = (props: MyProps) => {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <MainButton
-                        value={"Забронировать"}
-                        handler={() => {
-                            document.body.style.overflow = "hidden";
-                            dispatch(openFormStateAction());
-                            navigate("form");
-                        }}
-                    />
+                    <a href="https://client.vitaem.app/ab42fa60-fb63-4b6f-a40f-8f8c86ab17dd" 
+                    target="blank" rel="noopener noreferrer" className={styles.button}>
+                        <MainButton
+                            value={"Забронировать"}
+                            // handler={() => {
+                            //     document.body.style.overflow = "hidden";
+                            //     dispatch(openFormStateAction());
+                            //     navigate("form");
+                            // }}
+                        />
+                    </a>
                     <MainButton
                         value={"Подробнее"}
                         handler={() => navigate(`/houses/${id}`)}

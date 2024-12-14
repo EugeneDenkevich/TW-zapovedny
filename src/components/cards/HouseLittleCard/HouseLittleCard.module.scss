@@ -3,7 +3,7 @@
 
 .card {
   max-width: 379px;
-  height: 405px;
+  height: 445px;
   position: relative;
   margin: 0 auto;
   background: $colorWhite;
@@ -61,6 +61,7 @@
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 1;
+      line-clamp: 1;
       -webkit-box-orient: vertical;
       @media (max-width: 900px) {
         -webkit-line-clamp: 2;
@@ -76,6 +77,7 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       @media (max-width: 1050px) {
