@@ -26,7 +26,7 @@ export const ToFormButton = (props: IProps) => {
   return (
     <div className={className ? `${styles.form} ${className}` : styles.form}>
       <p>{value}</p>
-      <a href="https://client.vitaem.app/ab42fa60-fb63-4b6f-a40f-8f8c86ab17dd" target="blank" rel="noopener noreferrer">
+      <a href="https://client.vitaem.app/usadba-zapovednyi-ostrov" target="blank" rel="noopener noreferrer">
         <MainButton
           value={buttonValue}
           // handler={() => {

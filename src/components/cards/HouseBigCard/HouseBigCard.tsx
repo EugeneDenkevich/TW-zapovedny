@@ -144,7 +144,7 @@ const HouseBigCard = (props: MyProps) => {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="https://client.vitaem.app/ab42fa60-fb63-4b6f-a40f-8f8c86ab17dd" 
+                    <a href="https://client.vitaem.app/usadba-zapovednyi-ostrov" 
                     target="blank" rel="noopener noreferrer" className={styles.button}>
                         <MainButton
                             value={"Забронировать"}
