@@ -1,41 +1,21 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
-import { openFormStateAction } from "../../../reduxTools/formForOrderHouse/actions";
 import { useDatas } from "../../../services/useDatas";
 import { ClassName } from "../../../types";
-import { MainButton } from "../mainButton/MainButton";
+import { BookingLink } from "../../BookingModule/BookingLink";
 
 import styles from "./ToFormButton.module.scss";
 
 interface IProps extends ClassName {
   buttonValue?: string;
-  value?: string;  
+  value?: string;
 }
 
-export const ToFormButton = (props: IProps) => {
-  const datas = useDatas();
-  const {nameForSearchButton} = datas;
-  const {
-    buttonValue = nameForSearchButton,
-    value = "Заповедный остров",
-    className    
-  } = props;
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+export const ToFormButton = ({ buttonValue, value = "Заповедный остров", className }: IProps) => {
+  const { nameForSearchButton } = useDatas();
+
   return (
     <div className={className ? `${styles.form} ${className}` : styles.form}>
       <p>{value}</p>
-      <a href="https://client.vitaem.app/usadba-zapovednyi-ostrov" target="blank" rel="noopener noreferrer">
-        <MainButton
-          value={buttonValue}
-          // handler={() => {
-          //   document.body.style.overflow = "hidden";
-          //   dispatch(openFormStateAction());
-          //   navigate("form");
-          // }}
-        />
-      </a>
+      <BookingLink>{buttonValue ?? nameForSearchButton}</BookingLink>
     </div>
   );
 };

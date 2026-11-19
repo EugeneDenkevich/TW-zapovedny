@@ -1,3 +1,4 @@
+import { BookingLink } from "../../BookingModule/BookingLink";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
 
@@ -144,17 +145,7 @@ const HouseBigCard = (props: MyProps) => {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <a href="https://client.vitaem.app/usadba-zapovednyi-ostrov" 
-                    target="blank" rel="noopener noreferrer" className={styles.button}>
-                        <MainButton
-                            value={"Забронировать"}
-                            // handler={() => {
-                            //     document.body.style.overflow = "hidden";
-                            //     dispatch(openFormStateAction());
-                            //     navigate("form");
-                            // }}
-                        />
-                    </a>
+                    <BookingLink className={styles.button} />
                     <MainButton
                         value={"Подробнее"}
                         handler={() => navigate(`/houses/${id}`)}

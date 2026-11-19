@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Arrow } from "../../assets/icons/Arrow";
 import { closeFormStateAction, openFormStateAction } from "../../reduxTools/formForOrderHouse/actions";
 import { AppState } from "../../reduxTools/store";
+import { BookingModule } from "../BookingModule/BookingModule";
 import { Footer } from "../Footer";
 import { FormContainer } from "../form/FormContainer";
 import { Header } from "../Header";
@@ -53,6 +54,7 @@ export const Layout = ({ backendError }: Props) => {
   return (
     <div className={styles.layout}>
       <Header visible={visible} />
+      {!backendError && /^(info|rule|galleries|nearests)$/.test(pathname.split("/")[1]) && <BookingModule />}
       <Outlet />
       <Footer backendError={backendError} />
       <div

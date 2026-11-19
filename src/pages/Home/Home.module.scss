@@ -4,14 +4,14 @@
 
 .face-block {
   width: 100%;
-  height: 634px;
+  min-height: 634px;
+  padding-bottom: 80px;
   position: relative;
   @media (max-width: 768px) {
-    height: 100%;
-    min-height: 541px;
+    min-height: 311px;
   }
   @media (max-width: 360px) {
-    min-height: 290px;
+    min-height: 180px;
   }
 
   .content-container {
@@ -66,7 +66,7 @@
         margin-top: 30px;
         text-align: justify;
         @media (max-width: 768px) {
-          @include text($text-color, 16px, 500, normal, none);
+          display: none;
         }
         @media (max-width: 768px) {
           margin-top: 121px;
@@ -160,67 +160,43 @@
   }
 }
 
-.form {
-  position: absolute;
-  top: 581px;
-  left: 50%;
-  width: 100%;
-  height: 106px;
-  transform: translateX(-50%);
+.mobileDescription {
+  display: none;
+
   @media (max-width: 768px) {
-    top: 353px;
-    left: 76%;
-    width: 43%;
-    height: 127px;
-    flex-direction: column;
-    padding: 20px 28px;
-    @media (max-width: 550px) {
-      flex-direction: row;
+    display: block;
+    margin-top: 24px;
+    @include text($text-color, 16px, 500, normal, none);
+  }
+}
+
+.withoutPhoto {
+  height: auto;
+  min-height: 0;
+  padding-bottom: 24px;
+
+  .content-container .left-side {
+    margin-top: 32px;
+
+    .title {
       width: 100%;
-      height: 78px;
-      padding: 20px 28px;
-      position: relative;
-      top: 25px;
-      left: 50%;
+      padding: 0;
+      color: $text-color;
     }
-    @media (max-width: 450px) {
-      align-items: flex-start;
-      flex-direction: column;
-      height: 127px;
-    }
-    @media (max-width: 360px) {
-      top: 100px;
+
+    .descriptionTitle {
+      display: block;
+      margin-top: 24px;
+      color: $text-color;
     }
   }
 
-  p {
-    @media (max-width: 768px) {
-      align-self: flex-start;
-      @media (max-width: 550px) {
-        align-self: center;
-        margin-bottom: 0px;
-      }
-      @media (max-width: 450px) {
-        align-self: flex-start;
-      }
-    }
-  }
-
-  & button {
-    @media (max-width: 768px) {
-      max-width: 274px;
-    }
-    @media (max-width: 550px) {
-      max-width: 181px;
-    }
-    @media (max-width: 450px) {
-      max-width: 100%;
-    }
+  .content-container .right-side {
+    margin-top: 32px;
   }
 }
 
 .houses {
-  padding-top: 54px;
   @include flex(column, center, flex-start, nowrap);
 
   @media (max-width: 768px) {

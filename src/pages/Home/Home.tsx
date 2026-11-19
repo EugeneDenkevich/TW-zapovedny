@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Settings } from "react-slick";
 import { BeatLoader } from "react-spinners";
 
+import { BookingModule } from "../../components/BookingModule/BookingModule";
 import BackgroundBlockImage from "../../components/BackgroundBlockImage";
 import { MainButton } from "../../components/buttons/mainButton/MainButton";
 import { EntertainmentCard } from "../../components/cards/EntertainmentCard/EntertainmentCard";
@@ -220,8 +221,9 @@ export const Home = () => {
 
   return (
     <>
-      <div className={styles["face-block"]}>
-        <BackgroundBlockImage image={main_back} />
+      {!main_back && <BookingModule />}
+      <div className={`${styles["face-block"]} ${!main_back ? styles.withoutPhoto : ""}`}>
+        {main_back && <BackgroundBlockImage image={main_back} />}
         <Container>
           <div className={styles["content-container"]}>
             <div className={styles["left-side"]}>
@@ -236,13 +238,14 @@ export const Home = () => {
               </Carousel>
             </div>
           </div>
-          <ToFormButton
-            value={title}
-            buttonValue={nameForSearchButton}
-            className={styles.form}
-          />
         </Container>
       </div>
+      {main_back && <BookingModule onPhoto />}
+      {main_back && (
+        <Container>
+          <p className={styles.mobileDescription}>{mainPage && mainPage[0].description}</p>
+        </Container>
+      )}
       <HomeBlockTemplate title={titleHouse} className={styles.houses}>
         <div className={styles.blockDescription}>{mainPage && mainPage[0].house_description}</div>
         <div className={styles["houses-carousel"]}>

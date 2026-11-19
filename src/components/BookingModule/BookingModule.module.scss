@@ -1,0 +1,34 @@
+.module {
+  position: relative;
+  margin-top: 24px;
+  scroll-margin-top: 100px;
+
+  // Reserve the integration's initial height until its iframe is initialized.
+  [data-vitaem-module-integration] {
+    min-height: 220px;
+  }
+
+  @media (max-width: 768px) {
+    scroll-margin-top: 96px;
+  }
+
+  @media (max-width: 600px) {
+    [data-vitaem-module-integration] {
+      min-height: 320px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    scroll-margin-top: 61px;
+  }
+}
+
+.onPhoto {
+  margin-top: -53px;
+}
+
+// Keep the hidden calendar iframe offscreen without removing its layout:
+// Vitaem measures it before showing it, and its default width exceeds 320px.
+:global(.vitaem-popover-frame[style*="visibility: hidden"]) {
+  transform: translateX(-100%) !important;
+}

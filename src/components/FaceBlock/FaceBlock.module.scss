@@ -3,13 +3,14 @@
 
 .face-block {
   width: 100%;
-  height: 356px;
+  min-height: 356px;
+  padding-bottom: 80px;
   position: relative;
   @media (max-width: 768px) {
-    height: 311px;
+    min-height: 311px;
   }
   @media (max-width: 360px) {
-    height: 180px;
+    min-height: 180px;
   }
 
   .title {
@@ -29,5 +30,16 @@
       margin-left: 24px;
       @include text($colorWhite, 28px, 700, 28px, normal);
     }
+  }
+}
+
+.plainTitle {
+  margin-top: 32px;
+  color: $text-color;
+  font-size: 50px;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
   }
 }

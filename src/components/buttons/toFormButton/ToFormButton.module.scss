@@ -27,7 +27,8 @@
     }
   }
 
-  button {
+  a {
+    width: auto;
     @include text($colorWhite, 20px, 500, normal, none);
     flex-shrink: 0;
     @media (max-width: 768px) {
