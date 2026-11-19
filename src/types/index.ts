@@ -17,6 +17,7 @@ export interface IEntertainmentCard {
   id: number;
   photos?: string[];
   title: string;
+  pathPrefix?: string;
 }
 
 export interface IEntertainmentPrices {
@@ -28,6 +29,8 @@ export interface IEntertainments extends IEntertainmentCard {
   description_short: string;
   description_long?: string;
 }
+
+export interface IExcursion extends IEntertainments {}
 
 export interface INavbarData {
   id: number;
@@ -114,6 +117,7 @@ export interface IBackPhotos {
   photo_h: string;
   photo_k: string;
   photo_e: string;
+  photo_excursion: string;
 }
 
 export interface IMainPage {
@@ -127,6 +131,8 @@ export interface IMainPage {
   kitchen_description: string;
   entertainment_title: string;
   entertainment_description: string;
+  excursion_title: string;
+  excursion_description: string;
 }
 
 export interface INearest {

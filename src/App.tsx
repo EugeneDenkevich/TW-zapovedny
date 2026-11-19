@@ -5,6 +5,8 @@ import { Layout } from "./components/Layout/Layout";
 import { Contacts } from "./pages/Contacts";
 import Entertainment from "./pages/Entertainment/Entertainment";
 import EntertainmentCurrent from "./pages/EntertainmentCurrent/EntertainmentCurrent";
+import Excursion from "./pages/Excursion/Excursion";
+import ExcursionCurrent from "./pages/ExcursionCurrent/ExcursionCurrent";
 import { Home } from "./pages/Home/Home";
 import { HouseItem } from "./pages/HouseItem";
 import { Houses } from "./pages/Houses";
@@ -73,6 +75,10 @@ function App() {
                 path="entertainments/:id/form"
                 element={<EntertainmentCurrent />}
               />
+              <Route path="excursions" element={<Excursion />} />
+              <Route path="excursions/form" element={<Excursion />} />
+              <Route path="excursions/:id" element={<ExcursionCurrent />} />
+              <Route path="excursions/:id/form" element={<ExcursionCurrent />} />
               <Route path="galleries" element={<NewGallery />} />
               <Route path="galleries/form" element={<NewGallery />} />
               <Route path="nearests" element={<Nearest />} />

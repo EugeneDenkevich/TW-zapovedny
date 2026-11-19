@@ -11,12 +11,14 @@ import {DimensionsFunc, getImgSize} from "../../../pages/Home/Home";
 interface  MyProps extends IEntertainments {
   currency: string,
   cur_scale: number,
-  cur_rate: number
+  cur_rate: number,
+  pathPrefix?: string,
 } 
 
 export const EntertainmentBigCard = (props: MyProps) => {
 
-  const { id, photos, title, prices, description_short, currency, cur_rate, cur_scale } =
+  const { id, photos, title, prices, description_short, currency, cur_rate, cur_scale,
+    pathPrefix = "entertainments" } =
     props;
   const navigate = useNavigate();
 
@@ -62,7 +64,7 @@ export const EntertainmentBigCard = (props: MyProps) => {
       <div
         className={styles.title}
         onClick={() => {
-          navigate(`/entertainments/${id}`);
+          navigate(`/${pathPrefix}/${id}`);
         }}
       >
         {title}
@@ -94,7 +96,7 @@ export const EntertainmentBigCard = (props: MyProps) => {
         <div
           className={styles.more}
           onClick={() => {
-            navigate(`/entertainments/${id}`);
+            navigate(`/${pathPrefix}/${id}`);
           }}
         >
           Подробнее ...

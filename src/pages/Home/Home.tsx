@@ -14,7 +14,7 @@ import { Carousel } from "../../components/Carousel/Carousel";
 import { Container } from "../../components/Container/Container";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate/HomeBlockTemplate";
 import {
-  useGetDishesQuery, useGetEntertainmentsQuery, useGetMainPageQuery,
+  useGetDishesQuery, useGetEntertainmentsQuery, useGetExcursionsQuery, useGetMainPageQuery,
   useGetObjectsQuery
 } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas"
@@ -54,12 +54,14 @@ export const Home = () => {
   const { data: houses } = useGetObjectsQuery();
   const { data: dishes } = useGetDishesQuery();
   const { data: entertainments } = useGetEntertainmentsQuery();
+  const { data: excursions } = useGetExcursionsQuery();
   const { data: mainPage } = useGetMainPageQuery();
   const navigate = useNavigate();
   const datas = useDatas();
   const { currency, cur_rate, cur_scale } = useRate();
   const [selectedDish, setSelectedDish] = useState<IDishCard | null>(null);
-  const { title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton } = datas;
+  const { title, titleHouse, titleKitchen, titleEntertainment,
+    excursionDescription, main_back, nameForSearchButton } = datas;
 
   const sliderFaceBlockSettings: Settings = {
     slidesToShow: 1,
@@ -309,6 +311,7 @@ export const Home = () => {
                 photos={el.photos}
                 key={el.id}
                 id={el.id}
+                pathPrefix="entertainments"
               />
             );
           }) : (
@@ -325,6 +328,29 @@ export const Home = () => {
           />
         </div>
       </HomeBlockTemplate>
+      {excursions && excursions.length > 0 && (
+        <HomeBlockTemplate title="Экскурсионные программы">
+          <div className={styles.blockDescription}>{excursionDescription}</div>
+          <div className={styles["entertainment-container"]}>
+            {excursions.slice(0, 6).map((excursion) => (
+              <EntertainmentCard
+                title={excursion.title}
+                photos={excursion.photos}
+                key={excursion.id}
+                id={excursion.id}
+                pathPrefix="excursions"
+              />
+            ))}
+          </div>
+          <div className={styles.blockBtn}>
+            <MainButton
+              value="Подробнее"
+              className={styles["entertainment-button"]}
+              handler={() => navigate("/excursions")}
+            />
+          </div>
+        </HomeBlockTemplate>
+      )}
       <HomeBlockTemplate>
         <ToFormButton value={title} buttonValue={nameForSearchButton} />
       </HomeBlockTemplate>

@@ -10,24 +10,25 @@ import styles from "./Navbar.module.scss";
 const Navbar = (props: ClassName) => {
   const dispatch = useDispatch();
   const datas = useDatas();
-  const { titleHouse, titleKitchen, titleEntertainment } = datas;
+  const { titleHouse, titleKitchen, titleEntertainment, titleExcursion } = datas;
 
   const navbarData: INavbarData[] = [
     { id: 1, value: "Главная", path: "/" },
     { id: 2, value: titleHouse, path: "/houses" },
     { id: 3, value: titleKitchen, path: "/dish" },
     { id: 4, value: titleEntertainment, path: "/entertainments" },
-    { id: 5, value: "Что рядом", path: "/nearests" },
-    { id: 6, value: "Галерея", path: "/galleries" },
-    { id: 7, value: "Правила", path: "/rule" },
-    { id: 8, value: "Контакты", path: "/info" },
+    { id: 5, value: titleExcursion, path: "/excursions" },
+    { id: 6, value: "Что рядом", path: "/nearests" },
+    { id: 7, value: "Галерея", path: "/galleries" },
+    { id: 8, value: "Правила", path: "/rule" },
+    { id: 9, value: "Контакты", path: "/info" },
   ];
 
   return (
     <nav
       className={
         props.className
-          ? `${styles.container} ${props.className}`
+          ? `${styles.container} ${styles.desktop} ${props.className}`
           : styles.container
       }
     >

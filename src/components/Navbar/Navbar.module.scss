@@ -5,6 +5,16 @@
   width: 100%;
   @include flex(row, space-between, null, null);
 
+  &.desktop {
+    justify-content: flex-end;
+    gap: 16px;
+
+    .nav-link {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+  }
+
   .nav-link {
     color: white;
     font-weight: 500;

@@ -5,6 +5,7 @@ import {
   IBackPhotos,
   IDishCard,
   IEntertainments,
+  IExcursion,
   IGallery,
   IInfo,
   IMainPage,
@@ -38,6 +39,12 @@ export const api = createApi({
     }),
     getEntertainmentsCurrent: build.query<IEntertainments, string>({
       query: (id) => `entertainments/${id}`,
+    }),
+    getExcursions: build.query<IExcursion[], void>({
+      query: () => `excursions/`,
+    }),
+    getExcursionCurrent: build.query<IExcursion, string>({
+      query: (id) => `excursions/${id}`,
     }),
     getFeedingInfo: build.query<IMeal[], void>({
       query: () => `meal/`,
@@ -95,6 +102,8 @@ export const {
   useGetDishesQuery,
   useGetEntertainmentsQuery,
   useGetEntertainmentsCurrentQuery,
+  useGetExcursionsQuery,
+  useGetExcursionCurrentQuery,
   useGetFeedingInfoQuery,
   useGetInfoQuery,
   useGetObjectsQuery,
