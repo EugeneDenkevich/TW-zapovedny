@@ -16,6 +16,7 @@ import styles from "./Entertainment.module.scss";
 
 const Entertainment = () => {
   const { data } = useGetEntertainmentsQuery();
+  const smallListSlides = Math.max(1, Math.min(3, data?.length ?? 1));
   const datas = useDatas();
   const { currency, cur_rate, cur_scale } = useRate();
   
@@ -70,8 +71,8 @@ const Entertainment = () => {
     };
 
     const smallEntertainmentCardsSettings = {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: smallListSlides,
+        slidesToScroll: smallListSlides,
         speed: 900,
         rows: 1,
         dots: true,
@@ -80,7 +81,7 @@ const Entertainment = () => {
             <div>{i + 1}</div>
         ),
         appendDots: (dots: any) => <div className={styles.custom_padding}><ul>{dots}</ul></div>,
-        infinite: true,
+        infinite: false,
         slidesPerRow: 1,
         arrows: false,
         touchMove: false,
@@ -88,10 +89,11 @@ const Entertainment = () => {
             {
                 breakpoint: 950,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: Math.min(2, smallListSlides),
+                    slidesToScroll: Math.min(2, smallListSlides),
                     rows: 1,
                     slidesPerRow: 1,
+                    infinite: false,
                     arrows: false,
                 }
             },
@@ -101,6 +103,7 @@ const Entertainment = () => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     rows: 3,
+                    infinite: false,
                     arrows: false,
                     slidesPerRow: 1,
                 }
@@ -109,6 +112,15 @@ const Entertainment = () => {
     };
 
     let slider = useRef<Slider | null>(null);
+    const entertainmentCards = data?.map((element) => (
+      <EntertainmentBigCard
+        key={element.id}
+        currency={currency}
+        cur_scale={cur_scale}
+        cur_rate={cur_rate}
+        {...element}
+      />
+    ));
 
   return (
     <>
@@ -116,33 +128,29 @@ const Entertainment = () => {
       <HomeBlockTemplate title="">
         <div className={styles.container}>
           {data ? (
-            <div>
-              <Carousel settings={
-                  data.length >= 6 ? entertainmentCardsSettings
-                  : smallEntertainmentCardsSettings} slider={slider}>
-                {data.map((element) => (
-                  <EntertainmentBigCard
-                    key={element.id}
-                    currency = {currency}
-                    cur_scale = {cur_scale}
-                    cur_rate = {cur_rate} 
-                    {...element}
-                  />
-                ))}
-              </Carousel>
-              <div className={styles.blockNav}>
-                <button
-                  type="button"
-                  className={styles["slide-m-prev"]}
-                  onClick={() => slider.current?.slickPrev()}
-                ></button>
-                <button
-                  type="button"
-                  className={styles["slide-m-next"]}
-                  onClick={() => slider.current?.slickNext()}
-                ></button>
+            data.length > 3 && data.length <= 6 ? (
+              <div className={styles["cards-grid"]}>{entertainmentCards}</div>
+            ) : (
+              <div>
+                <Carousel settings={
+                    data.length > 6 ? entertainmentCardsSettings
+                    : smallEntertainmentCardsSettings} slider={slider}>
+                  {entertainmentCards}
+                </Carousel>
+                <div className={styles.blockNav}>
+                  <button
+                    type="button"
+                    className={styles["slide-m-prev"]}
+                    onClick={() => slider.current?.slickPrev()}
+                  ></button>
+                  <button
+                    type="button"
+                    className={styles["slide-m-next"]}
+                    onClick={() => slider.current?.slickNext()}
+                  ></button>
+                </div>
               </div>
-            </div>
+            )
           ) : (
             <div className={styles.preload}>
               <BeatLoader color="#583711" />

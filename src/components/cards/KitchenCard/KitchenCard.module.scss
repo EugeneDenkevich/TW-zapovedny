@@ -5,9 +5,6 @@
   display: flex;
   background: $colorWhite;
   box-shadow: 0px 4px 17px 5px rgba(218, 203, 203, 0.37);
-  @media (max-width: 550px) {
-    max-height: 98px;
-  }
 
   &__image-container {
     position: relative;
@@ -73,6 +70,31 @@
     @media (max-width: 768px) {
       font-weight: 400;
       font-size: 14px;
+    }
+  }
+
+  &__more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    margin-top: 4px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: $primaryColor;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primaryColor;
+      outline-offset: 2px;
     }
   }
 }

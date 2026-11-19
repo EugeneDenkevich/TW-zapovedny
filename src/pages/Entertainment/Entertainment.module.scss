@@ -39,3 +39,25 @@
 .preload {
   text-align: center;
 }
+
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  gap: 35px 24px;
+
+  > * {
+    width: 100%;
+  }
+
+  @media (max-width: 950px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 18px;
+  }
+
+  @media (max-width: 550px) {
+    grid-template-columns: minmax(0, 514px);
+    justify-content: center;
+  }
+}

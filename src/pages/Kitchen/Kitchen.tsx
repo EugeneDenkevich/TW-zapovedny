@@ -1,9 +1,10 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Slider from "react-slick";
 import {BeatLoader} from "react-spinners";
 
 import {ArrowNextPaginatop} from "../../assets/icons/ArrowNextPagination";
 import {KitchenCard} from "../../components/cards/KitchenCard";
+import { DishDescriptionDialog } from "../../components/cards/KitchenCard/DishDescriptionDialog";
 import {LittleKitchenCard} from "../../components/cards/LittleKitchenCard";
 import {MealTimeCard} from "../../components/cards/MealTimeCard";
 import Carousel from "../../components/Carousel";
@@ -15,7 +16,7 @@ import {
 } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas";
 import { useRate } from "../../services/useRate";
-import { IMeal } from "../../types";
+import { IDishCard, IMeal } from "../../types";
 
 import { ToFormButton } from "./../../components/buttons/toFormButton/ToFormButton";
 
@@ -28,6 +29,7 @@ export const Kitchen = () => {
   const datas = useDatas();  
   const { title, titleKitchen, kitchen_back, nameForSearchButton } = datas;
   const { currency, cur_rate, cur_scale } = useRate();
+  const [selectedDish, setSelectedDish] = useState<IDishCard | null>(null);
   
     const kitchenCardsSettings = {
         arrows: false,
@@ -149,6 +151,7 @@ export const Kitchen = () => {
                         photo={el.photo}
                         title={el.title}
                         description={el.description}
+                        onOpenDetails={setSelectedDish}
                       />
                     ))}
                   </Carousel>
@@ -177,6 +180,10 @@ export const Kitchen = () => {
       <HomeBlockTemplate>
         <ToFormButton value={title} buttonValue={nameForSearchButton} />
       </HomeBlockTemplate>
+      <DishDescriptionDialog
+        dish={selectedDish}
+        onClose={() => setSelectedDish(null)}
+      />
     </>
   );
 };

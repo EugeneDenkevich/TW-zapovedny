@@ -9,6 +9,7 @@ import { MainButton } from "../../components/buttons/mainButton/MainButton";
 import { EntertainmentCard } from "../../components/cards/EntertainmentCard/EntertainmentCard";
 import { HouseLittleCard } from "../../components/cards/HouseLittleCard";
 import { KitchenCard } from "../../components/cards/KitchenCard";
+import { DishDescriptionDialog } from "../../components/cards/KitchenCard/DishDescriptionDialog";
 import { Carousel } from "../../components/Carousel/Carousel";
 import { Container } from "../../components/Container/Container";
 import { HomeBlockTemplate } from "../../components/HomeBlockTemplate/HomeBlockTemplate";
@@ -18,6 +19,7 @@ import {
 } from "../../reduxTools/requests/apiRequests";
 import { useDatas } from "../../services/useDatas"
 import { useRate } from "../../services/useRate";
+import { IDishCard } from "../../types";
 
 import { ToFormButton } from './../../components/buttons/toFormButton';
 
@@ -56,6 +58,7 @@ export const Home = () => {
   const navigate = useNavigate();
   const datas = useDatas();
   const { currency, cur_rate, cur_scale } = useRate();
+  const [selectedDish, setSelectedDish] = useState<IDishCard | null>(null);
   const { title, titleHouse, titleKitchen, titleEntertainment, main_back, nameForSearchButton } = datas;
 
   const sliderFaceBlockSettings: Settings = {
@@ -285,6 +288,7 @@ export const Home = () => {
                   photo={el.photo}
                   title={el.title}
                   description={el.description}
+                  onOpenDetails={setSelectedDish}
                 />
               ))
               }
@@ -324,6 +328,10 @@ export const Home = () => {
       <HomeBlockTemplate>
         <ToFormButton value={title} buttonValue={nameForSearchButton} />
       </HomeBlockTemplate>
+      <DishDescriptionDialog
+        dish={selectedDish}
+        onClose={() => setSelectedDish(null)}
+      />
     </>
   );
 };
