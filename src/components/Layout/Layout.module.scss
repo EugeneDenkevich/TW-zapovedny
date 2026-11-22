@@ -17,20 +17,6 @@
   }
 }
 
-.initial-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  background: #fff;
-  color: #583711;
-  font-size: 16px;
-}
-
 .arrow-top {
   @include flex(row, center, center, nowrap);
   z-index: 2;
